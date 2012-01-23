@@ -1,0 +1,13 @@
+@import "compass/css3/images";
+@import "compass/css3/box-shadow";
+
+$theme.toolbar {
+  background-color: #D5D5D5;
+  .ie8 &{
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr'#D5D5D5', endColorstr='#A8A8A8');
+  }
+  @include background(linear-gradient(#D5D5D5, #A8A8A8));
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  border-color: #888;
+}

@@ -1,0 +1,13 @@
+$theme.sc-scroller-view.sc-vertical {
+  .thumb {
+    background-color: rgba(0, 0, 0, .3);
+    border-radius: 7px;
+    width: 8px;
+    right: 2px;
+    top: 4px;
+  }
+  .track, .cap, .endcap,
+  .thumb .thumb-center, .thumb .thumb-top, .thumb .thumb-bottom {
+    background: transparent;
+  }
+}

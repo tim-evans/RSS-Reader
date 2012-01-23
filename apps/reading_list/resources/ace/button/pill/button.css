@@ -1,0 +1,19 @@
+@import "compass/css3/box-shadow";
+@import "compass/css3/images";
+
+@theme(pill) {
+  $theme.button {
+    border: 1px solid #AAA;
+    @include box-shadow(rgba(255, 255, 255, .4) 0 1px 0,
+                        rgba(255, 255, 255, .4) 0 1px 0 inset);
+    @include background(linear-gradient(#CACACA, #BABABA));
+
+    .ie8 &{
+      filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#CACACA', endColorstr='#BABABA');
+    }
+
+    &.sel, &.sel.active, &.active {
+      border: 0;
+    }
+  }
+}

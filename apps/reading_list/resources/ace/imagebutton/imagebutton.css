@@ -1,0 +1,22 @@
+@import "compass/css3/transition";
+
+$theme.image-button {
+  border: 0px none;
+  @include transition-property(opacity);
+  @include transition-duration(0.2s);
+
+  &.disabled {
+    opacity: .3;
+    filter: alpha(opacity=30);
+  }
+
+  div {
+    background-repeat: no-repeat;
+    background-position: center;
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    top: 0px;
+    bottom: 0px;
+  }
+}

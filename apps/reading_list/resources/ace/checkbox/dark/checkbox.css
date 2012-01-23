@@ -1,0 +1,29 @@
+@theme(dark.sc-regular-size) {
+  $theme.checkbox {
+    .button {
+      width: 18px;
+      height: 20px;
+      @include slice('btn_check-dark.png');
+    }
+
+    &.active .button {
+      @include slice('btn_check-dark_pressed.png');
+    }
+
+    &.sel .button {
+      @include slice('btn_check-dark_selected.png');
+    }
+
+    &.sel.active .button {
+      @include slice('btn_check-dark_selected_pressed.png');
+    }
+
+    &.disabled .button {
+      @include slice('btn_check-dark_disabled.png');
+    }
+
+    &.disabled .button {
+      @include slice('btn_check-dark_selected_disabled.png');
+    }
+  }
+}

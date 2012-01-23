@@ -1,0 +1,4 @@
+$theme.sc-thumb-view {
+  @include slice("icn_toolbar-resize-handle.png");
+  background-position: center;
+}

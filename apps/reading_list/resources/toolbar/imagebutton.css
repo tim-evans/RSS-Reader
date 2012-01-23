@@ -1,0 +1,26 @@
+$theme.image-button {
+  .add-button {
+    @include slice("btn_toolbar-add.png");
+  }
+
+  &.active .add-button {
+    @include slice("btn_toolbar-add_active.png");
+  }
+
+  &.disabled .add-button {
+    @include slice("btn_toolbar-add_disabled.png");
+  }
+
+
+  .remove-button {
+    @include slice("btn_toolbar-remove.png");
+  }
+
+  &.active .remove-button {
+    @include slice("btn_toolbar-remove_active.png");
+  }
+
+  &.disabled .remove-button {
+    @include slice("btn_toolbar-remove_disabled.png");
+  }
+}

@@ -1,0 +1,17 @@
+@import "compass/css3/images";
+
+@theme(source-list) {
+  $theme.collection {
+    background-color: #FFF;
+    .sc-list-item, .sc-collection-item {
+      border-bottom: 1px solid #EEE !important;
+      &.sel {
+        background-color: #006CB1;
+        @include background(linear-gradient(#006CB1 3%, #006CB1, #004782));
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#006CB1', endColorstr='#004782');
+        border-bottom: 1px solid #004782 !important;
+        color: #FFF;
+      }
+    }
+  }
+}
