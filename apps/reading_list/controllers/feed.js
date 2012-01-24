@@ -6,6 +6,6 @@ ReadingList.feedController = SC.ArrayController.create({
       action: function (target) {
         ReadingList.store.find(RSS.Feed, target.get('value'));
       }
-    }).popup(target, SC.PICKER_POINTER);
+    }).popup(target, SC.PICKER_MENU_POINTER);
   }
 });
