@@ -1,0 +1,11 @@
+$theme.sc-pane.sc-panel {
+  & > .sc-view {
+    background-color: transparent;
+  }
+
+  background-color: #222;
+  color: #FFF;
+  border-radius: 12px;
+  border: 1px solid #000;
+  box-shadow: rgba(0, 0, 0, .4) 0px 4px 6px;
+}
