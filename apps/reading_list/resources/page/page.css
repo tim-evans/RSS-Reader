@@ -43,19 +43,6 @@ $theme.scrollable {
   overflow: auto;
 }
 
-$theme.label.sc-label-view {
-  font-size: 14px;
-  line-height: 54px;
-  padding-left: 24px;  
-
-  .icon {
-    position: absolute;
-    top: 50%;
-    margin-top: -8px;
-    left: 4px;
-  }
-}
-
 $theme.feed-item {
   font-size: 14px;
   > span {
