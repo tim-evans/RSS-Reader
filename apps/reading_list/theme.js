@@ -21,6 +21,7 @@ ReadingList.Theme = SC.AceTheme.create({
 
 // SproutCore needs to know that your app's theme exists
 SC.Theme.addTheme(ReadingList.Theme);
+ReadingList.Theme.Dark = ReadingList.Theme.subtheme('dark');
 
 // Setting it as the default theme makes every pane SproutCore
 // creates default to this theme unless otherwise specified.
