@@ -1,0 +1,38 @@
+$theme.picker {
+  .sc-pointer {
+    width: 0;
+    height: 0;
+
+    &.perfectTop {
+      bottom: -8px;
+      background: none;
+      background-color: transparent;
+      border-left: 9px solid transparent;
+      border-right: 9px solid transparent;
+      border-top: 9px solid #222;
+      width: 0;
+      height: 0;
+      margin-left: -9px;
+
+      &.extra-left {
+        left: 24px;
+        margin-left: 0px;
+      }
+
+      &.extra-left {
+        right: 42px;
+        margin-left: 0px;
+      }
+    }
+  }
+
+  &.perfectTop {
+    margin-top: 9px;
+    &.extra-left {
+      margin-left: -34px; /* 9px + 24px + 1px */
+    }
+    &.extra-right {
+      margin-left: 34px; /* 18px + 24px + 1px */
+    }
+  }
+}
