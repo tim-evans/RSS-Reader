@@ -1,0 +1,128 @@
+@import "compass/css3/text-shadow";
+@import "compass/css3/images";
+@import "compass/css3/box-shadow";
+@import "compass/css3/border-radius";
+@import "compass/css3/transition";
+
+$theme.button {
+  @include border-radius(3px);
+  @include transition-property(opacity);
+  @include transition-duration(0.2s);
+
+  .sc-button-label {
+    padding: 0 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+
+  &.disabled {
+    opacity: .3;
+    filter: alpha(opacity=30);
+  }
+}
+
+@theme(light) {
+  $theme.button {
+    border: 1px solid #CCC;
+    @include background(linear-gradient(#F8F8F8, #EEE 42%, #ECECEC 42%, #DDD));
+
+    .sc-button-label {
+      color: #000;
+      @include text-shadow(rgba(255, 255, 255, .6) 0 1px);
+    }
+
+    &.active {
+      @include box-shadow(#DDD 0 1px 0 inset);
+    }
+  }
+}
+
+@theme(medium) {
+  $theme.button {
+    border: 1px solid #676767;
+    @include background(linear-gradient(#E1E1E1, #C7C7C7 42%, #C1C1C1 42%, #A8A8A8));
+    @include box-shadow(rgba(255, 255, 255, .5) 0 1px 0);
+
+    .sc-button-label {
+      color: #000;
+      @include text-shadow(rgba(255, 255, 255, .6) 0 -1px);
+    }
+
+    &.active {
+      @include box-shadow(rgba(255, 255, 255, .5) 0 1px 0,
+                          #A0A0A0 0 1px 0 inset);
+    }
+  }
+}
+
+@theme(dark) {
+  $theme.button {
+    border: 1px solid #000;
+    @include background(linear-gradient(#909090, #5E5E5E 42%, #525252 42%, #3B3B3B));
+    @include box-shadow(#333 0 1px 0);
+
+    .sc-button-label {
+      color: #FFF;
+      @include text-shadow(rgba(0, 0, 0, .4) 0 -1px);
+    }
+
+    &.active {
+      @include box-shadow(#333333 0 1px 0,
+                          #383838 0 1px 0 inset);
+    }
+  }
+}
+
+@theme(blue) {
+  $theme.button {
+    border: 1px solid #000;
+    @include background(linear-gradient(#66A7D0, #1677B6 42%, #0069AE 42%, #00579D));
+    @include box-shadow(#333 0 1px 0);
+
+    .sc-button-label {
+      color: #FFF;
+      @include text-shadow(rgba(0, 0, 0, .2) 0 -1px);
+    }
+
+    &.active {
+      @include box-shadow(#333333 0 1px 0,
+                          #00579D 0 1px 0 inset);
+    }
+  }
+}
+
+@theme(green) {
+  $theme.button {
+    border: 1px solid #000;
+    @include background(linear-gradient(#7CCB82, #34A33C 42%, #219929 42%, #1C8524));
+    @include box-shadow(#333 0 1px 0);
+
+    .sc-button-label {
+      color: #FFF;
+      @include text-shadow(rgba(0, 0, 0, .2) 0 -1px);
+    }
+
+    &.active {
+      @include box-shadow(#333333 0 1px 0,
+                          #1CB524 0 1px 0 inset);
+    }
+  }
+}
+
+@theme(red) {
+  $theme.button {
+    border: 1px solid #000;
+    @include background(linear-gradient(#DF6666, #C21616 42%, #BA0000 42%, #A50000));
+    @include box-shadow(#333 0 1px 0);
+
+    .sc-button-label {
+      color: #FFF;
+      @include text-shadow(rgba(0, 0, 0, .2) 0 -1px);
+    }
+
+    &.active {
+      @include box-shadow(#333333 0 1px 0,
+                          #A40000 0 1px 0 inset);
+    }
+  }
+}
