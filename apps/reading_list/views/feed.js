@@ -13,10 +13,10 @@ require('views/feed_item');
 ReadingList.FeedView = SC.View.extend(
   /** @scope ReadingList.FeedView.prototype */{
 
-  childViews: ['list', 'toolbar'],
+  childViews: ['feeds', 'entries', 'topToolbar', 'bottomToolbar'],
 
-  list: SC.ScrollView.design({
-    layout: { top: 0, bottom: 33 },
+  feeds: SC.ScrollView.design({
+    layout: { top: 33, bottom: 33 },
     createChildViews: function () {
       sc_super();
       var view = this.createChildView(this.get('noFeedsView'));
@@ -34,6 +34,13 @@ ReadingList.FeedView = SC.View.extend(
       rowHeight: 55,
       contentBinding: SC.Binding.oneWay('ReadingList.feedController'),
       selectionBinding: 'ReadingList.feedController.selection',
+      actOnSelect: YES,
+      action: function () {
+        var entries = this.getPath('parentView.parentView.parentView.entries'),
+            feeds = this.getPath('parentView.parentView.parentView.feeds');
+        feeds.set('isVisible', NO);
+        entries.set('isVisible', YES);
+      },
       exampleView: ReadingList.FeedItemView.design({
         needsEllipsis: YES,
         countBinding: SC.Binding.oneWay('.content.entries.length'),
@@ -51,7 +58,56 @@ ReadingList.FeedView = SC.View.extend(
     })
   }),
 
-  toolbar: SC.ToolbarView.design({
+  entries: SC.ScrollView.design({
+    isVisible: NO,
+    layout: { top: 33, bottom: 33 },
+    createChildViews: function () {
+      sc_super();
+      var view = this.createChildView(this.get('noEntriesView'));
+      this.set('noEntriesView', view);
+      this.childViews.unshiftObject(view);
+    },
+
+    noEntriesView: SC.LabelView.design({
+      isVisibleBinding: SC.Binding.oneWay('ReadingList.feedController.length').not(),
+      layout: { left: .15, right: .15, top: .15, zIndex: 2 },
+      value: '_You currently have no feeds to read'
+    }),
+
+    contentView: SC.SourceListView.design({
+      rowHeight: 55,
+      contentBinding: SC.Binding.oneWay('ReadingList.entriesController'),
+      selectionBinding: 'ReadingList.entriesController.selection',
+      exampleView: SC.LabelView.design({
+        needsEllipsis: YES,
+        valueBinding: SC.Binding.oneWay('.content.title')
+      })
+    })
+  }),
+
+  topToolbar: SC.ToolbarView.design({
+    layout: { top: 0, height: 33, borderBottom: 1 },
+    childViews: ['back'],
+
+    back: SC.ButtonView.design(SC.AutoResize, {
+      themeName: 'medium',
+      isEnabledBinding: SC.Binding.oneWay('.parentView.parentView.entries.isVisible'),
+      title: '_Go Back',
+      layout: { left: 10, top: 7, bottom: 5 },
+      shouldResizeWidth: YES,
+      autoResizePadding: {
+        width: 36
+      },
+      action: function () {
+        var entries = this.getPath('parentView.parentView.entries'),
+            feeds = this.getPath('parentView.parentView.feeds');
+        feeds.set('isVisible', YES);
+        entries.set('isVisible', NO);
+      }
+    })
+  }),
+
+  bottomToolbar: SC.ToolbarView.design({
     layout: { bottom: 0, height: 33, borderTop: 1 },
     childViews: ['add', 'remove', 'thumb'],
 
