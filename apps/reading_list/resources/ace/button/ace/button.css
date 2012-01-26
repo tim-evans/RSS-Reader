@@ -11,6 +11,7 @@ $theme.button {
 
   .sc-button-label {
     padding: 0 12px;
+    line-height: 24px;
     font-weight: bold;
     text-transform: uppercase;
   }
@@ -63,6 +64,7 @@ $theme.button {
 
     .sc-button-label {
       color: #FFF;
+      padding-top: 0px;
       @include text-shadow(rgba(0, 0, 0, .4) 0 -1px);
     }
 
