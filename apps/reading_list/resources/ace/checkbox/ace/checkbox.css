@@ -6,6 +6,13 @@
       @include slice('btn_check.png');
     }
 
+    .label {
+      text-shadow: none;
+      font-size: 12px;
+      line-height: 20px;
+      -webkit-font-smoothing: antialiased;
+    }
+
     &.active .button {
       @include slice('btn_check_pressed.png');
     }
@@ -22,8 +29,20 @@
       @include slice('btn_check_disabled.png');
     }
 
-    &.disabled .button {
+    &.sel.disabled .button {
       @include slice('btn_check_selected_disabled.png');
+    }
+  }
+}
+
+@theme(remove) {
+  $theme.checkbox {
+    &.sel .button {
+      @include slice('btn_check_remove_selected.png');
+    }
+
+    &.sel.active .button {
+      @include slice('btn_check_remove_selected_pressed.png');
     }
   }
 }

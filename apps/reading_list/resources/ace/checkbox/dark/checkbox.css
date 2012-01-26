@@ -6,6 +6,10 @@
       @include slice('btn_check-dark.png');
     }
 
+    .label {
+      color: #FFF;
+    }
+
     &.active .button {
       @include slice('btn_check-dark_pressed.png');
     }
@@ -22,7 +26,7 @@
       @include slice('btn_check-dark_disabled.png');
     }
 
-    &.disabled .button {
+    &.sel.disabled .button {
       @include slice('btn_check-dark_selected_disabled.png');
     }
   }
