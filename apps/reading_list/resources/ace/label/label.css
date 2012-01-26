@@ -1,0 +1,8 @@
+@theme(matte-dark) {
+  .sc-label-view {
+    line-height: 20px;
+    text-shadow: none;
+    color: #999;
+    -webkit-font-smoothing: antialiased;
+  }
+}
