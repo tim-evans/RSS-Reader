@@ -1,0 +1,22 @@
+$theme.manager {
+  .remove.checkbox .button {
+    top: 19px;
+    left: 27px;
+  }
+
+  .header {
+    .checkbox .label {
+      margin-left: 12px;
+    }
+
+    .title {
+      font-size: 11px;
+    }
+  }
+
+  .collection {
+    .sc-list-item, .sc-collection-item {
+      border-bottom: 1px solid #EEE !important;
+    }
+  }
+}
