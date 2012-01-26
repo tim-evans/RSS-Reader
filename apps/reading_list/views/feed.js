@@ -41,20 +41,7 @@ ReadingList.FeedView = SC.View.extend(
         feeds.set('isVisible', NO);
         entries.set('isVisible', YES);
       },
-      exampleView: ReadingList.FeedItemView.design({
-        needsEllipsis: YES,
-        countBinding: SC.Binding.oneWay('.content.entries.length'),
-        iconBinding: SC.Binding.oneWay('.content.link').transform(
-          function (url) {
-            return url + '/favicon.ico';
-          }),
-        titleBinding: SC.Binding.oneWay('.content.title'),
-        authorBinding: SC.Binding.oneWay('.content.author'),
-        descriptionBinding: SC.Binding.oneWay('.content.description'),
-        detail: function () {
-          return this.get('author') || this.get('description');
-        }.property('author', 'description').cacheable()
-      })
+      exampleView: ReadingList.FeedItemView
     })
   }),
 
