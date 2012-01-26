@@ -11,3 +11,9 @@ $theme.toolbar {
   box-shadow: none;
   border-color: #888;
 }
+
+@theme(matte-dark) {
+  $theme.toolbar {
+    background: #000;
+  }
+}
