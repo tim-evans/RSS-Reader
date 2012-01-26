@@ -7,6 +7,7 @@
       border-bottom: 1px solid #EEE !important;
       &.sel {
         background-color: #006CB1;
+        text-shadow: none;
         @include background(linear-gradient(#006CB1 3%, #006CB1, #004782));
         filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#006CB1', endColorstr='#004782');
         border-bottom: 1px solid #004782 !important;
