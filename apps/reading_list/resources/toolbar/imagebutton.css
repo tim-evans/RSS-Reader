@@ -1,6 +1,16 @@
 $theme.image-button {
+  .img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+  }
+
   .add-button {
     @include slice("btn_toolbar-add.png");
+    width: 11px;
+    height: 12px;
+    margin-top: -6px;
+    margin-left: -5px;
   }
 
   &.active .add-button {
@@ -14,6 +24,10 @@ $theme.image-button {
 
   .remove-button {
     @include slice("btn_toolbar-remove.png");
+    width: 14px;
+    height: 15px;
+    margin-top: -7px;
+    margin-left: -7px;
   }
 
   &.active .remove-button {
@@ -22,5 +36,21 @@ $theme.image-button {
 
   &.disabled .remove-button {
     @include slice("btn_toolbar-remove_disabled.png");
+  }
+
+  .menu-button {
+    @include slice("btn_toolbar-menu.png");
+    width: 22px;
+    height: 15px;
+    margin-top: -7px;
+    margin-left: -9px;
+  }
+
+  &.active .menu-button {
+    @include slice("btn_toolbar-menu_active.png");
+  }
+
+  &.disabled .menu-button {
+    @include slice("btn_toolbar-menu_disabled.png");
   }
 }
