@@ -10,25 +10,40 @@
   font sizes and serifs.
   @extend SC.ScrollView
  */
-ReadingList.PageView = SC.View.extend(
+ReadingList.PageView = SC.ScrollView.design(
   /** @scope ReadingList.PageView.prototype */{
 
-  classNames: ['page'],
+  contentView: SC.View.design({
 
-  useStaticLayout: YES,
+    classNames: ['page'],
 
-  /**
-    The page's text should be selectable.
-    @type Boolean
-    @default YES
-   */
-  isTextSelectable: YES,
+    useStaticLayout: YES,
 
-  displayProperties: ['content'],
+    /**
+      The page's text should be selectable.
+      @type Boolean
+      @default YES
+     */
+    isTextSelectable: YES,
 
-  render: function (context) {
-    context.push('<h1>' + this.getPath('content.title') + '</h1>');
-    context.push(this.getPath('content.content'));
-  }
+    displayProperties: ['content'],
 
+    render: function (context) {
+      context.push('<h1>' + this.getPath('content.title') + '</h1>');
+      context.push(this.getPath('content.content'));
+    },
+
+    contentBinding: SC.Binding.oneWay('.parentView.parentView.content'),
+
+    parentFrameBinding: SC.Binding.oneWay('.parentView.parentView.frame'),
+
+    layout: function () {
+      var height = SC.getPath(this, 'parentFrame.height');
+      height = height
+               ? height - 100
+               : 0;
+      return { minHeight: height };
+    }.property('parentFrame').cacheable()
+
+  })
 });
