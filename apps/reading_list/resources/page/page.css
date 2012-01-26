@@ -13,6 +13,10 @@ $theme.page {
     margin: 0 auto;
   }
 
+  strong {
+    font-weight: bold;
+  }
+
   img, > iframe {
     display: block;
     margin: 20px auto;
@@ -23,6 +27,11 @@ $theme.page {
 
   center img {
     display: inline-block;
+  }
+
+  ul {
+    margin-left: 2em;
+    margin: 1em;
   }
 
   ol {
