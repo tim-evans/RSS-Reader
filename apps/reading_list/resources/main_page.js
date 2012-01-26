@@ -4,6 +4,7 @@
 // ==========================================================================
 /*globals ReadingList */
 require('views/feed');
+require('views/card');
 
 ReadingList.mainPage = SC.Page.design({
   mainPane: SC.MainPane.design({
@@ -12,25 +13,13 @@ ReadingList.mainPage = SC.Page.design({
     split: SC.SplitView.design({
       dividerThickness: 1,
       canCollapseViews: NO,
-      topLeftMinThickness: 250,
+      topLeftMinThickness: 400,
+      defaultThickness: 400,
       topLeftView: ReadingList.FeedView,
 
       bottomRightView: ReadingList.CardView.design({
         contentBinding: SC.Binding.oneWay('ReadingList.entriesController*selection.firstObject').single(),
-        exampleView: SC.View.design({
-          classNames: ['scrollable'],
-          childViews: [ReadingList.PageView.extend({
-            contentBinding: SC.Binding.oneWay('.parentView.content'),
-            parentFrameBinding: SC.Binding.oneWay('.parentView.frame'),
-            layout: function () {
-              var height = SC.getPath(this, 'parentFrame.height');
-              height = height
-                       ? height - 100
-                       : 0;
-              return { minHeight: height };
-            }.property('parentFrame').cacheable()
-          })]
-        })
+        exampleView: ReadingList.PageView
       })
     })
   })
