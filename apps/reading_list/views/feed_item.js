@@ -2,23 +2,37 @@ ReadingList.FeedItemView = SC.View.extend({
 
   classNames: ['feed-item'],
 
-  needsEllipsis: NO,
+  needsEllipsis: YES,
 
-  icon: null,
+  countBinding: SC.Binding.oneWay('.content.entries.length'),
 
-  title: null,
+  defaultIcon: sc_static('feed_item/icn_default-buddy.png'),
 
-  detail: null,
+  iconBinding: SC.Binding.oneWay('.content.link').transform(
+    function (url) {
+      return url && (url + '/favicon.ico');
+    }),
+
+  titleBinding: SC.Binding.or('.content.title', '.content.feedURL'),
+
+  authorBinding: SC.Binding.oneWay('.content.author'),
+
+  descriptionBinding: SC.Binding.oneWay('.content.description'),
+
+  detail: function () {
+    return this.get('author') || this.get('description');
+  }.property('author', 'description').cacheable(),
 
   displayProperties: ['title', 'icon', 'detail', 'needsEllipsis', 'isSelected'],
 
   render: function (context) {
     var ellipsis = this.get('needsEllipsis')
                    ? ' ellipsis'
-                   : '';
+                   : '',
+        icon = this.get('icon') || this.get('defaultIcon');
 
     context.setClass('sel', this.get('isSelected'));
-    context.push('<img src="' + this.get('icon') + '" class="icon"/>',
+    context.push('<img src="' + icon + '" class="icon"/>',
                  '<span class="title' + ellipsis +'">' + this.get('title') + '</span>',
                  '<span class="detail' + ellipsis +'">' + this.get('detail') + '</span>');
   },
@@ -36,7 +50,7 @@ ReadingList.FeedItemView = SC.View.extend({
     }
 
     if (this.didChangeFor(K, 'icon')) {
-      $.find('.icon').attr('src', this.get('icon'));
+      $.find('.icon').attr('src', this.get('icon') || this.get('defaultIcon'));
     }
 
     if (this.didChangeFor(K, 'title')) {

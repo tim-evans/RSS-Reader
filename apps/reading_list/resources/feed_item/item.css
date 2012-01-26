@@ -1,0 +1,33 @@
+$theme.feed-item {
+  font-size: 14px;
+  > span {
+    z-index: 1;
+    position: relative;
+    padding-left: 38px; /* 12px + 16px + 10px */
+    margin-top: 12px;
+    display: block;
+    &.title {
+      font-weight: bold;
+      line-height: 17px;
+    }
+    &.detail {
+      margin-top: 1px;
+      line-height: 13px;
+      font-size: 11px;
+      color: #666;
+      -webkit-font-smoothing: antialiased;
+    }
+  }
+  &.sel .detail {
+   color: #FFF;
+  }
+
+  img {
+    position: absolute;
+    top: 50%;
+    margin-top: -8px;
+    width: 16px;
+    height: 16px;
+    left: 12px;
+  }
+}
