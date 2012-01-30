@@ -23,7 +23,8 @@ ReadingList.AddFeedPane = SC.PickerPane.extend({
 
     addFeedButton: SC.ButtonView.design({
       themeName: 'blue',
-      title: '_Add Feed',
+      title: '_Add feed',
+      localize: YES,
       layout: { bottom: 12, left: 12, width: 182, height: 26, border: 1 },
       valueBinding: SC.Binding.oneWay('.parentView.field.value'),
       action: function () {
@@ -34,6 +35,7 @@ ReadingList.AddFeedPane = SC.PickerPane.extend({
 
     goBack: SC.ButtonView.design({
       title: '_Go Back',
+      localize: YES,
       layout: { bottom: 12, right: 12, width: 182, height: 26, border: 1 },
       targetBinding: SC.Binding.oneWay('.parentView.parentView'),
       action: 'remove'

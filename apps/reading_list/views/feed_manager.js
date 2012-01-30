@@ -28,6 +28,7 @@ ReadingList.FeedManagerView = SC.View.extend({
       themeName: 'dark',
       layout: { left: 27, height: 20, centerY: 0 },
       autoResizePadding: { width: 40 },
+      localize: YES,
       title: '_Check All',
       valueBinding: 'ReadingList.feedManagerController.areAllSelected'
     })
@@ -78,7 +79,10 @@ ReadingList.FeedManagerView = SC.View.extend({
     cancel: SC.ButtonView.design({
       themeName: 'dark',
       layout: { centerX: 68, width: 124, top: 3, height: 26, border: 1 },
-      title: '_Cancel'
+      localize: YES,
+      title: '_Cancel',
+      target: 'ReadingList.statechart',
+      action: 'cancel'
     })
   })
 });
