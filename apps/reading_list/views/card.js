@@ -41,7 +41,7 @@ ReadingList.CardView = SC.View.extend(
       view = this.get('contentView');
       view.animate({
         left: -1 * SC.getPath(view, 'frame.width'),
-         right: SC.getPath(view, 'frame.width')
+        right: SC.getPath(view, 'frame.width')
       }, {
         timing: 'ease-out',
         duration: .25
