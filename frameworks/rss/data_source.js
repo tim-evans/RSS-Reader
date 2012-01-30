@@ -65,7 +65,6 @@ RSS.DataSource = SC.DataSource.extend(
                 '&hl=' + SC.Locale.currentLanguage +
                 '&scoring=h' +
                 '&callback=?', function (result) {
-        console.error(result);
         if (result.responseStatus === 200) {
           store.dataSourceDidComplete(storeKey, result.responseData.feed, id);          
         } else {
