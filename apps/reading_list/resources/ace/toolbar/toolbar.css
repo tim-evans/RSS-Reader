@@ -10,6 +10,7 @@ $theme.toolbar {
   -webkit-box-shadow: none;
   box-shadow: none;
   border-color: #888;
+  border-bottom-width: 0px;
 }
 
 @theme(matte-dark) {
