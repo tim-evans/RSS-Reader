@@ -39,7 +39,6 @@ ReadingList.FeedManagerView = SC.View.extend({
     contentView: SC.ListView.design({
       rowHeight: 55,
       contentBinding: SC.Binding.oneWay('ReadingList.feedController'),
-      selectionBinding: 'ReadingList.feedController.selection',
       exampleView: SC.View.design({
         childViews: ['item', 'checkbox'],
         item: ReadingList.FeedItemView.design({
@@ -64,7 +63,7 @@ ReadingList.FeedManagerView = SC.View.extend({
       isEnabledBinding: SC.Binding.oneWay('ReadingList.feedManagerController.length').bool(),
       layout: { centerX: -68, width: 124, top: 3, height: 26, border: 1 },
       themeName: 'red',
-      targetBinding: SC.Binding.oneWay('ReadingList.feedManagerController'),
+      target: 'ReadingList.statechart',
       action: 'removeSelectedFeeds',
       titleBinding: SC.Binding.oneWay('ReadingList.feedManagerController.length'),
       displayTitle: function () {

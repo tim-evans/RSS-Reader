@@ -35,12 +35,8 @@ ReadingList.FeedView = SC.View.extend(
       contentBinding: SC.Binding.oneWay('ReadingList.feedController'),
       selectionBinding: 'ReadingList.feedController.selection',
       actOnSelect: YES,
-      action: function () {
-        var entries = this.getPath('parentView.parentView.parentView.entries'),
-            feeds = this.getPath('parentView.parentView.parentView.feeds');
-        feeds.set('isVisible', NO);
-        entries.set('isVisible', YES);
-      },
+      target: 'ReadingList.statechart',
+      action: 'viewEntries',
       exampleView: ReadingList.FeedItemView
     })
   }),
@@ -85,12 +81,8 @@ ReadingList.FeedView = SC.View.extend(
       autoResizePadding: {
         width: 36
       },
-      action: function () {
-        var entries = this.getPath('parentView.parentView.entries'),
-            feeds = this.getPath('parentView.parentView.feeds');
-        feeds.set('isVisible', YES);
-        entries.set('isVisible', NO);
-      }
+      target: 'ReadingList.statechart',
+      action: 'viewFeeds'
     })
   }),
 
@@ -109,7 +101,10 @@ ReadingList.FeedView = SC.View.extend(
     remove: SC.ImageButtonView.design({
       themeName: 'pill',
       layout: { left: 42, width: 32, top: 7, bottom: 5 },
-      image: 'remove-button'
+      image: 'remove-button',
+      isEnabledBinding: SC.Binding.oneWay('ReadingList.feedController.length').bool(),
+      target: 'ReadingList.statechart',
+      action: 'manageFeeds'
     }),
 
     thumb: SC.ThumbView.design({

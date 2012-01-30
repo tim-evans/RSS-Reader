@@ -12,6 +12,8 @@ ReadingList.main = function main() {
 
   ReadingList.feedManagerController.set('content',
     ReadingList.store.find(SC.Query.local(RSS.Feed, 'isSelected = true')));
+
+  ReadingList.statechart.initStatechart();
 };
 
 function main() { ReadingList.main(); }
