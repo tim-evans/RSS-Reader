@@ -2,9 +2,12 @@ ReadingList.FeedItemView = SC.View.extend({
 
   classNames: ['feed-item'],
 
+  classNameBindings: ['hasIcon'],
+
   needsEllipsis: YES,
 
   countBinding: SC.Binding.oneWay('.content.entries.length'),
+  hasIconBinding: SC.Binding.oneWay('SC.userDefaults*hasIcon'),
 
   defaultIcon: sc_static('feed_item/icn_default-buddy.png'),
 
