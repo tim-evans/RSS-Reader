@@ -75,5 +75,18 @@ RSS.DataSource = SC.DataSource.extend(
       return YES;
     }
     return NO;
+  },
+
+  destroyRecord: function (store, storeKey) {
+    var recordType = store.recordTypeFor(storeKey),
+        uType = SC.guidFor(recordType);
+
+    if (uType === SC.guidFor(RSS.Feed) ||
+        uType === SC.guidFor(RSS.Entry)) {
+      store.dataSourceDidDestroy(storeKey);
+      return YES;
+    }
+
+    return NO;
   }
 });
