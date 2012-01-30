@@ -6,21 +6,20 @@ ReadingList.FeedItemView = SC.View.extend({
 
   needsEllipsis: YES,
 
-  countBinding: SC.Binding.oneWay('.content.entries.length'),
   hasIconBinding: SC.Binding.oneWay('SC.userDefaults*hasIcon'),
 
   defaultIcon: sc_static('feed_item/icn_default-buddy.png'),
 
-  iconBinding: SC.Binding.oneWay('.content.link').transform(
+  iconBinding: SC.Binding.oneWay('*content.link').transform(
     function (url) {
       return url && (url + '/favicon.ico');
     }),
 
-  titleBinding: SC.Binding.or('.content.title', '.content.feedURL'),
+  titleBinding: SC.Binding.oneWay('*content.title'),
 
-  authorBinding: SC.Binding.oneWay('.content.author'),
+  authorBinding: SC.Binding.oneWay('*content.author'),
 
-  descriptionBinding: SC.Binding.oneWay('.content.description'),
+  descriptionBinding: SC.Binding.oneWay('*content.description'),
 
   detail: function () {
     return this.get('author') || this.get('description');
