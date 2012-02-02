@@ -1,0 +1,46 @@
+$theme.entry-item {
+  .title {
+    position: absolute;
+    font-size: 14px;
+    line-height: 17px;
+    top: 12px;
+    left: 22px;
+    right: 200px;
+    font-weight: bold;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+
+  .detail, .timestamp, .labels {
+    position: absolute;
+    font-size: 11px;
+    line-height: 13px;
+    color: #666;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .detail {
+    bottom: 11px;
+    top: 30px; /* 12px + 17px + 1px */
+    left: 22px;
+  }
+
+  .timestamp {
+    top: 14px;
+    right: 20px;
+    width: auto;
+  }
+
+  .labels {
+    bottom: 11px;
+    right: 20px;
+    width: auto;
+  }
+
+  &.sel {
+    .timestamp, .detail, .labels {
+      color: #FFF;
+      font-weight: normal;
+    }
+  }
+}
