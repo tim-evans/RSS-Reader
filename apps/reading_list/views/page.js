@@ -29,7 +29,21 @@ ReadingList.PageView = SC.ScrollView.design(
     displayProperties: ['content'],
 
     render: function (context) {
-      context.push('<h1>' + this.getPath('content.title') + '</h1>');
+      var esc = SC.RenderContext.escapeHTML;
+
+      context = context.begin('div');
+      context.addClass('header');
+
+      context.push('<h1>' + esc(this.getPath('content.title')) + '</h1>');
+      context.push('<small>' + esc(this.getPath('content.author.fullName')) + '</small>');
+
+      context = context.begin('span');
+      context.addClass('categories');
+      (this.getPath('content.categories') || []).forEach(function (v) {
+        context.push('<span class="ace reading-list tag">', v.get('value'), '</span>');
+      });
+      context = context.end();
+      context = context.end();
       context.push(this.getPath('content.content'));
     },
 
