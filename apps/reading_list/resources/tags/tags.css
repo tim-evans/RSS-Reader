@@ -1,0 +1,18 @@
+$theme.tag {
+  border-radius: 9px;
+  background-color: #EEE;
+  border: 1px solid #CCC;
+  line-height: 18px;
+  height: 18px;
+  color: #000;
+  padding: 0 10px;
+  font-size: 12px;
+  font-weight: bold;
+  margin: 0 2px;
+  display: inline-block;
+
+  &.sel {
+    color: #FFF;
+    background-color: #0081CA;
+  }
+}
