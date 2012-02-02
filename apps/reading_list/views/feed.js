@@ -4,6 +4,7 @@
 // ==========================================================================
 /*globals ReadingList */
 require('views/feed_item');
+require('views/entry_item');
 
 /**
   A card that can be swiped in and out using gestures
@@ -61,10 +62,7 @@ ReadingList.FeedView = SC.View.extend(
       rowHeight: 55,
       contentBinding: SC.Binding.oneWay('ReadingList.entriesController'),
       selectionBinding: 'ReadingList.entriesController.selection',
-      exampleView: SC.LabelView.design({
-        needsEllipsis: YES,
-        valueBinding: SC.Binding.oneWay('.content.title')
-      })
+      exampleView: ReadingList.EntryItemView
     })
   }),
 
@@ -88,7 +86,7 @@ ReadingList.FeedView = SC.View.extend(
 
   bottomToolbar: SC.ToolbarView.design({
     layout: { bottom: 0, height: 33, borderTop: 1 },
-    childViews: ['add', 'remove', 'thumb'],
+    childViews: ['add', 'remove', 'menu', 'thumb'],
 
     add: SC.ImageButtonView.design({
       themeName: 'pill',
@@ -105,6 +103,13 @@ ReadingList.FeedView = SC.View.extend(
       isEnabledBinding: SC.Binding.oneWay('ReadingList.feedController.length').bool(),
       target: 'ReadingList.statechart',
       action: 'manageFeeds'
+    }),
+
+    menu: SC.SelectView.design({
+      themeName: 'pill',
+      layout: { left: 74, width: 42, top: 7, bottom: 5 },
+      image: 'menu-button',
+      items: ['Help', 'Show icons?']
     }),
 
     thumb: SC.ThumbView.design({
