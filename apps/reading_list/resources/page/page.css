@@ -3,9 +3,17 @@ $theme.page {
   padding: 50px 50px;
   font-size: 20px;
 
-  h1 {
-    font-size: 32px;
+  .header {
     padding-bottom: 25px;
+    h1 {
+      font-size: 32px;
+      padding-bottom: 0px;
+    }
+
+    .categories {
+      float: right;
+      margin-top: -4px;
+    }
   }
 
   img, iframe {
@@ -19,7 +27,7 @@ $theme.page {
 
   img, > iframe {
     display: block;
-    margin: 20px auto;
+    margin: 0 auto;
     border-width: 0px !important;
     max-width: 100%;
     height: auto;
