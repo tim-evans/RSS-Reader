@@ -5,17 +5,17 @@ RSS.Entry = SC.Record.extend(
 
   primaryKey: 'link',
 
-  author: SC.Record.attr(String),
+  author: SC.Record.toOne('RSS.Author'),
 
   title: SC.Record.attr(String),
 
   link: SC.Record.attr(String),
 
-  published: SC.Record.attr(SC.DateTime, {
+  published: SC.Record.attr(Date, {
     key: 'publishedDate',
     transform: {
       to: function (dateString) {
-        return SC.DateTime.create(Date.parse(dateString));
+        return new Date(Date.parse(dateString));
       }
     }
   }),
@@ -24,6 +24,8 @@ RSS.Entry = SC.Record.extend(
     key: 'contentSnippet'
   }),
 
-  content: SC.Record.attr(String)
+  content: SC.Record.attr(String),
+
+  categories: SC.Record.toMany('RSS.Category')
 
 });

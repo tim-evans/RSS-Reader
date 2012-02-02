@@ -18,13 +18,14 @@ RSS.DataSource = SC.DataSource.extend(
   url: 'https://ajax.googleapis.com/ajax/services/feed/',
 
   /**
-    
+
    */
   fetch: function (store, query) {
     var recordType = query.recordType,
         key = this.get('apiKey');
 
-    if (SC.guidFor(recordType) === SC.guidFor(RSS.Entry)) {
+    if (SC.guidFor(recordType) === SC.guidFor(RSS.Entry) &&
+        query.conditions) {
       $.getJSON(this.get('url') + 'find' +
                 '?v=1.0' +
                 '&q=' + query.conditions.query +
@@ -37,6 +38,8 @@ RSS.DataSource = SC.DataSource.extend(
           var storeKeys = store.loadRecords(RSS.Entry, result.responseData.entries);
           store.loadQueryResults(query, storeKeys);
           store.dataSourceDidFetchQuery(query);
+          self.extractMetadata(store, result.responseData.entries);
+
         } else {
           store.dataSourceDidErrorQuery(query, result.responseDetails);
         }
@@ -54,7 +57,8 @@ RSS.DataSource = SC.DataSource.extend(
    */
   retrieveRecord: function (store, storeKey, id) {
     var recordType = store.recordTypeFor(storeKey),
-        key = this.get('apiKey');
+        key = this.get('apiKey'),
+        self = this;
 
     if (SC.guidFor(recordType) === SC.guidFor(RSS.Feed)) {
       $.getJSON(this.get('url') + 'load' +
@@ -66,7 +70,9 @@ RSS.DataSource = SC.DataSource.extend(
                 '&scoring=h' +
                 '&callback=?', function (result) {
         if (result.responseStatus === 200) {
-          store.dataSourceDidComplete(storeKey, result.responseData.feed, id);          
+          store.dataSourceDidComplete(storeKey, result.responseData.feed, id);
+          self.extractMetadata(store, result.responseData.feed.entries);
+
         } else {
           store.dataSourceDidError(storeKey, result.responseDetails, id);
         }
@@ -74,6 +80,43 @@ RSS.DataSource = SC.DataSource.extend(
       return YES;
     }
     return NO;
+  },
+
+  extractMetadata: function (store, entries) {
+    var len = entries.length,
+        i, j,
+        entry,
+        categories,
+        category,
+        author;
+
+    for (i = 0; i < len; i++) {
+      entry = entries[i];
+
+      // Extract categories
+      categories = [];
+      for (j = 0; j < entry.categories.length; j++) {
+        category = store.readDataHash(
+                     store.storeKeyFor(
+                       RSS.Category, entry.categories[j])) ||
+                   { value: entry.categories[j],
+                     entries: [] };
+
+        category.entries.push(entry.link);
+        categories.push(category);
+      }
+      store.loadRecords(RSS.Category, categories);
+
+      // Extract authors
+      author = store.readDataHash(
+                 store.storeKeyFor(
+                   RSS.Author, entry.author)) ||
+               { value: entry.author,
+                 entries: [] };
+
+      author.entries.push(entry.link);
+      store.pushRetrieve(RSS.Author, entry.author, author);
+    }
   },
 
   destroyRecord: function (store, storeKey) {
