@@ -1,4 +1,4 @@
-SC.stringsFor('en', {
+SC.stringsFor('en_US', {
 
   // Add new feed
   '_Add feed': 'Add feed',
