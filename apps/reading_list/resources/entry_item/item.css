@@ -5,13 +5,13 @@ $theme.entry-item {
     line-height: 17px;
     top: 12px;
     left: 22px;
-    right: 200px;
+    right: 20px;
     font-weight: bold;
     white-space: nowrap;
     overflow: hidden;
   }
 
-  .detail, .timestamp, .labels {
+  .detail, .timestamp {
     position: absolute;
     font-size: 11px;
     line-height: 13px;
@@ -26,19 +26,13 @@ $theme.entry-item {
   }
 
   .timestamp {
-    top: 14px;
-    right: 20px;
-    width: auto;
-  }
-
-  .labels {
     bottom: 11px;
     right: 20px;
     width: auto;
   }
 
   &.sel {
-    .timestamp, .detail, .labels {
+    .timestamp, .detail {
       color: #FFF;
       font-weight: normal;
     }
