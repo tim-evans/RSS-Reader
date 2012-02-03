@@ -28,7 +28,9 @@ ReadingList.FeedView = SC.View.extend(
     noFeedsView: SC.LabelView.design({
       isVisibleBinding: SC.Binding.oneWay('ReadingList.feedController.length').not(),
       layout: { left: .15, right: .15, top: .15, zIndex: 2 },
-      value: '_You currently have no feeds to read'
+      localize: YES,
+      escapeHTML: NO,
+      value: "_There's nothing to read."
     }),
 
     contentView: SC.SourceListView.design({

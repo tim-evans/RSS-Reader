@@ -1,5 +1,7 @@
 SC.stringsFor('en_US', {
 
+  "_There's nothing to read.": "There's nothing to read.",
+
   // Add new feed
   '_Add feed': 'Add feed',
   '_Go Back': 'Go Back',
