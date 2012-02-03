@@ -33,7 +33,7 @@ $theme.button {
     }
 
     &.active {
-      @include box-shadow(#DDD 0 1px 0 inset);
+      @include box-shadow(#DDD 0 0 1px 1px inset);
     }
   }
 }
@@ -51,7 +51,7 @@ $theme.button {
 
     &.active {
       @include box-shadow(rgba(255, 255, 255, .5) 0 1px 0,
-                          #A0A0A0 0 1px 0 inset);
+                          #A0A0A0 0 0 1px 1px inset);
     }
   }
 }
@@ -70,7 +70,7 @@ $theme.button {
 
     &.active {
       @include box-shadow(#333333 0 1px 0,
-                          #383838 0 1px 0 inset);
+                          #383838 0 0 1px 1px inset);
     }
   }
 }
@@ -88,7 +88,7 @@ $theme.button {
 
     &.active {
       @include box-shadow(#333333 0 1px 0,
-                          #00579D 0 1px 0 inset);
+                          #00579D 0 0 1px 1px inset);
     }
   }
 }
@@ -106,7 +106,7 @@ $theme.button {
 
     &.active {
       @include box-shadow(#333333 0 1px 0,
-                          #1CB524 0 1px 0 inset);
+                          #1CB524 0 0 1px 1px inset);
     }
   }
 }
@@ -124,7 +124,7 @@ $theme.button {
 
     &.active {
       @include box-shadow(#333333 0 1px 0,
-                          #A40000 0 1px 0 inset);
+                          #A40000 0 0 1px 1px inset);
     }
   }
 }
