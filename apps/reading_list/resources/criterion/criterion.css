@@ -1,0 +1,56 @@
+@import "compass/css3/border-radius";
+
+@theme(pill) {
+  $theme.criterion {
+    z-index: 101;
+    display: inline-block;
+    font-size: 12px;
+    margin: 0 2px;
+
+    & > span {
+      height: 18px;
+      padding: 2px 10px;
+      line-height: 20px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .head {
+      color: #FFF;
+      background-color: #5A5A5A;
+      @include border-left-radius(10px);
+      margin-right: 1px;
+      border-right: 1px solid #272727;
+      text-shadow: #000 0 -1px 0;
+      font-weight: bold;
+      text-transform: lowercase;
+      font-variant: small-caps;
+      line-height: 18px;
+      padding-right: 0;
+    }
+
+    .head:after {
+      content: '\25BC';
+      color: #CCC;
+      font-size: 6px;
+      padding-left: 2px;
+      padding-right: 3px;
+      text-align: center;
+    }
+
+    .tail {
+      background-color: #EEE;
+      @include border-right-radius(10px);
+    }
+
+    &.sel {
+      background-color: transparent;
+      .tail {
+        background-color: #5A5A5A;
+        color: #FFF;
+      }
+      .head:after {
+        color: #FFF;
+      }
+    }
+  }
+}
