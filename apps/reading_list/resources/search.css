@@ -1,0 +1,40 @@
+@import "compass/css3/images";
+
+$theme.search-field {
+  border: 1px solid #CCC;
+  background-color: #FFF;
+  @include background-image(linear-gradient(#DDD 0%, rgba(255, 255, 255, 0) 22%, rgba(255, 255, 255, 0)));
+
+  .sc-collection-view {
+    background-color: transparent;
+    overflow: visible;
+    white-space: nowrap;
+    margin-left: 3px;
+  }
+
+  .sc-text-field-view {
+    background-color: transparent;
+    .border {
+      -webkit-appearance: none;
+      background-color: transparent;
+    }
+
+    .padding {
+      left: 5px;
+      right: 5px;
+      background-color: transparent;
+    }
+
+    &.focus {
+      outline: none;
+    }
+
+    input {
+      box-shadow: none;
+    }
+  }
+
+  .criterion {
+    padding-top: 3px;
+  }
+}
