@@ -27,6 +27,7 @@ ReadingList.AddFeedPane = SC.PickerPane.extend({
       localize: YES,
       isDefault: YES,
       layout: { bottom: 12, left: 12, width: 182, height: 26, border: 1 },
+      isDefault: YES,
       valueBinding: SC.Binding.oneWay('.parentView.field.value'),
       action: function () {
         this.getPath('parentView.parentView').tryToPerform('action', this);
