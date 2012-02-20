@@ -1,0 +1,9 @@
+body,
+.sc-main {
+  background-color: #F1F1F1;
+  background-image: -webkit-repeating-linear-gradient(0deg, #F1F1F1, #F1F1F1 4px, #EFEFEF 4px, #EFEFEF 8px);
+  background-image:    -moz-repeating-linear-gradient(0deg, #F1F1F1, #F1F1F1 4px, #EFEFEF 4px, #EFEFEF 8px);
+  background-image:     -ms-repeating-linear-gradient(0deg, #F1F1F1, #F1F1F1 4px, #EFEFEF 4px, #EFEFEF 8px);
+  background-image:      -o-repeating-linear-gradient(0deg, #F1F1F1, #F1F1F1 4px, #EFEFEF 4px, #EFEFEF 8px);
+  background-image:         repeating-linear-gradient(0deg, #F1F1F1, #F1F1F1 4px, #EFEFEF 4px, #EFEFEF 8px);
+}
