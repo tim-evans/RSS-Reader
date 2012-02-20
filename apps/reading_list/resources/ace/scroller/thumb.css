@@ -22,17 +22,17 @@ $theme.sc-scroller-view.sc-vertical {
 
   .track {
     @include transition-duration(.1s);
+    @include border-radius(6px);
+    width: 12px;
+    left: 0;
+    bottom: 6px;
+    top: 6px;
   }
 
   &:hover {
     .track {
       @include box-shadow(rgba(0, 0, 0, .3) 0 0 10px 0 inset);
       background-color: rgba(0, 0, 0, .1);
-      @include border-radius(6px);
-      width: 12px;
-      left: 0;
-      bottom: 6px;
-      top: 6px;
     }
   }
 }
