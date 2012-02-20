@@ -22,11 +22,11 @@ $theme.sc-scroller-view.sc-vertical {
 
   .track {
     @include transition-duration(.1s);
-    @include border-radius(6px);
-    width: 12px;
-    left: 0;
-    bottom: 6px;
-    top: 6px;
+    @include border-radius(4px);
+    width: 8px;
+    left: 2px;
+    bottom: 3px;
+    top: 3px;
   }
 
   &:hover {
