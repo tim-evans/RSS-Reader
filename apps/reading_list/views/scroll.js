@@ -1,5 +1,5 @@
 SC.mixin(SC.ScrollerView.prototype, {
-  scrollbarThickness: 12,
+  scrollbarThickness: 14,
   buttonLength: 12,
   hasButtons: NO
 });
