@@ -1,13 +1,18 @@
 $theme.sc-scroller-view.sc-vertical {
-  .thumb {
-    background-color: rgba(0, 0, 0, .3);
-    border-radius: 7px;
-    width: 8px;
-    right: 2px;
-    top: 4px;
-  }
   .track, .cap, .endcap,
-  .thumb .thumb-center, .thumb .thumb-top, .thumb .thumb-bottom {
+  .thumb .thumb-top, .thumb .thumb-bottom {
     background: transparent;
+  }
+  .thumb {
+    width: 8px;
+  }
+  .thumb .thumb-center {
+    width: 6px;
+    background-image: none;
+    background-color: rgba(0, 0, 0, .3);
+    box-shadow: 0 0 3px 0 #FFF;
+    border-radius: 6px;
+    right: -2px;
+    top: 4px;
   }
 }
