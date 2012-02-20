@@ -1,6 +1,7 @@
 require('core');
 
 ReadingList.feedController = SC.ArrayController.create({
+
   addFeed: function (target) {
     ReadingList.AddFeedPane.create({
       action: function (target) {
@@ -11,5 +12,12 @@ ReadingList.feedController = SC.ArrayController.create({
         }
       }
     }).popup(target, SC.PICKER_MENU_POINTER);
-  }
+  },
+
+  save: function () {
+    if (this.get('length')) {
+      SC.userDefaults.set('feeds', this.getEach('feedUrl'));
+    }
+  }.observes('length')
+
 });
