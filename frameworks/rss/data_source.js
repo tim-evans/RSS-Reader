@@ -33,16 +33,17 @@ RSS.DataSource = SC.DataSource.extend(
                 '&num=-1' +
                 '&hl=' + SC.Locale.currentLanguage +
                 '&callback=?', function (result) {
+        SC.run(function () {
+          if (result.responseStatus === 200) {
+            var storeKeys = store.loadRecords(RSS.Entry, result.responseData.entries);
+            store.loadQueryResults(query, storeKeys);
+            store.dataSourceDidFetchQuery(query);
+            self.extractMetadata(store, result.responseData.entries);
 
-        if (result.responseStatus === 200) {
-          var storeKeys = store.loadRecords(RSS.Entry, result.responseData.entries);
-          store.loadQueryResults(query, storeKeys);
-          store.dataSourceDidFetchQuery(query);
-          self.extractMetadata(store, result.responseData.entries);
-
-        } else {
-          store.dataSourceDidErrorQuery(query, result.responseDetails);
-        }
+          } else {
+            store.dataSourceDidErrorQuery(query, result.responseDetails);
+          }
+        });
       });
       return YES;
     }
@@ -69,13 +70,15 @@ RSS.DataSource = SC.DataSource.extend(
                 '&hl=' + SC.Locale.currentLanguage +
                 '&scoring=h' +
                 '&callback=?', function (result) {
-        if (result.responseStatus === 200) {
-          store.dataSourceDidComplete(storeKey, result.responseData.feed, id);
-          self.extractMetadata(store, result.responseData.feed.entries);
+        SC.run(function () {
+          if (result.responseStatus === 200) {
+            store.dataSourceDidComplete(storeKey, result.responseData.feed, id);
+            self.extractMetadata(store, result.responseData.feed.entries);
 
-        } else {
-          store.dataSourceDidError(storeKey, result.responseDetails, id);
-        }
+          } else {
+            store.dataSourceDidError(storeKey, result.responseDetails, id);
+          }
+        });
       });
       return YES;
     }
