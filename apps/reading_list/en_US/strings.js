@@ -4,7 +4,7 @@ SC.stringsFor('en_US', {
 
   // Add new feed
   '_Add feed': 'Add feed',
-  '_Go Back': 'Go Back',
+  '_Back': '&larr; Back',
 
   // Feed Manager
   '_Check All': 'Check All',

@@ -17,7 +17,7 @@ ReadingList.FeedView = SC.View.extend(
   childViews: ['feeds', 'entries', 'topToolbar', 'bottomToolbar'],
 
   feeds: SC.ScrollView.design({
-    layout: { top: 33, bottom: 33 },
+    layout: { top: 39, bottom: 33 },
     createChildViews: function () {
       sc_super();
       var view = this.createChildView(this.get('noFeedsView'));
@@ -46,7 +46,7 @@ ReadingList.FeedView = SC.View.extend(
 
   entries: SC.ScrollView.design({
     isVisible: NO,
-    layout: { top: 33, bottom: 33 },
+    layout: { top: 39, bottom: 33 },
     createChildViews: function () {
       sc_super();
       var view = this.createChildView(this.get('noEntriesView'));
@@ -69,13 +69,15 @@ ReadingList.FeedView = SC.View.extend(
   }),
 
   topToolbar: SC.ToolbarView.design({
-    layout: { top: 0, height: 33, borderBottom: 1 },
-    childViews: ['back'],
+    layout: { top: 0, height: 39, borderBottom: 1 },
+    childViews: ['back', 'title'],
 
     back: SC.ButtonView.design(SC.AutoResize, {
       themeName: 'medium',
+      isVisibleBinding: SC.Binding.oneWay('.parentView.parentView.entries.isVisible'),
       isEnabledBinding: SC.Binding.oneWay('.parentView.parentView.entries.isVisible'),
-      title: '_Go Back',
+      localize: YES,
+      title: '_Back',
       layout: { left: 10, top: 7, bottom: 5 },
       shouldResizeWidth: YES,
       autoResizePadding: {
@@ -83,6 +85,12 @@ ReadingList.FeedView = SC.View.extend(
       },
       target: 'ReadingList.statechart',
       action: 'viewFeeds'
+    }),
+
+    title: SC.LabelView.design(SC.AutoResize, {
+      layout: { top: 7, bottom: 5, centerX: 0 },
+      isVisibleBinding: SC.Binding.oneWay('.parentView.parentView.entries.isVisible'),
+      valueBinding: SC.Binding.oneWay('ReadingList.feedController*selection.firstObject.title')
     })
   }),
 

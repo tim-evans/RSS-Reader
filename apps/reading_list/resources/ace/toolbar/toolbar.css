@@ -11,6 +11,13 @@ $theme.toolbar {
   box-shadow: none;
   border-color: #888;
   border-bottom-width: 0px;
+
+  .sc-label-view {
+    color: #333;
+    font-size: 14px;
+    line-height: 26px;
+    font-weight: bold;
+  }
 }
 
 @theme(matte-dark) {
