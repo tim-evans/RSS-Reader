@@ -2,6 +2,8 @@ require('core');
 
 ReadingList.feedController = SC.ArrayController.create({
 
+  allowsMultipleSelection: NO,
+
   addFeed: function (target) {
     ReadingList.AddFeedPane.create({
       action: function (target) {
