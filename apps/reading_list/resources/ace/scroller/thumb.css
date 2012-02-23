@@ -13,8 +13,10 @@ $theme.sc-scroller-view.sc-vertical {
   }
 
   .thumb .thumb-center {
+    @include transition-duration(.15s);
     width: 8px;
     background-image: none;
+    opacity: 0;
     background-color: rgba(0, 0, 0, .5);
     @include box-shadow(#FFF 0 0 3px 0);
     @include border-radius(4px);
@@ -23,8 +25,7 @@ $theme.sc-scroller-view.sc-vertical {
   }
 
   .track {
-    @include transition-duration(.1s);
-    @include transition-delay(1s);
+    @include transition-duration(.15s);
     @include border-radius(4px);
     width: 8px;
     left: 2px;
@@ -32,9 +33,14 @@ $theme.sc-scroller-view.sc-vertical {
     top: 4px;
   }
 
-  &:hover, &.active {
+  &.active-thumb {
+    .thumb .thumb-center {
+      opacity: 1;
+    }
+  }
+
+  &.active-track {
     .track {
-      @include transition-delay(0s);
       @include box-shadow(rgba(0, 0, 0, .25) 0 0 6px 0 inset);
       background-color: rgba(200, 200, 200, .3);
     }
