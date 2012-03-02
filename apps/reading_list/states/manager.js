@@ -8,8 +8,8 @@ ReadingList.FeedManagerState = SC.State.extend(
   /** @scope ReadingList.FeedManagerState.prototype */{
 
   enterState: function () {
-    var view = SC.getPath(ReadingList,
-                          'mainPage.mainPane.splitView.topLeftView.managerView');
+    var view = ReadingList.mainPage.get('manager');
+
     view.set('isVisible', YES);
     view.adjust({ top: view.getPath('frame').height,
                   bottom: -1 * view.getPath('frame').height });
@@ -41,8 +41,7 @@ ReadingList.FeedManagerState = SC.State.extend(
   },
 
   exitState: function () {
-    var view = SC.getPath(ReadingList,
-                          'mainPage.mainPane.splitView.topLeftView.managerView');
+    var view = ReadingList.mainPage.get('manager');
 
     // Translate 100% down
     view.animate({

@@ -3,8 +3,7 @@ ReadingList.InboxState = SC.State.extend({
   initialSubstate: 'feedList',
 
   enterState: function () {
-    var view = SC.getPath(ReadingList,
-                          'mainPage.mainPane.splitView.topLeftView.feedView');
+    var view = ReadingList.mainPage.get('lists');
     if (!view.get('isVisible')) {
       view.set('isVisible', YES);
       setTimeout(function () {
@@ -19,8 +18,7 @@ ReadingList.InboxState = SC.State.extend({
   },
 
   exitState: function () {
-    var view = SC.getPath(ReadingList,
-                          'mainPage.mainPane.splitView.topLeftView.feedView');
+    var view = ReadingList.mainPage.get('lists');
 
     view.animate('opacity', 0, {
       timing: 'ease-out',
@@ -32,8 +30,7 @@ ReadingList.InboxState = SC.State.extend({
 
   feedList: SC.State.design({
     enterState: function () {
-      var view = SC.getPath(ReadingList,
-                             'mainPage.mainPane.splitView.topLeftView.feedView.feeds');
+    var view = ReadingList.mainPage.get('feeds');
 
       if (!view.get('isVisible')) {
         view.set('isVisible', YES);
@@ -52,8 +49,7 @@ ReadingList.InboxState = SC.State.extend({
     },
 
     exitState: function () {
-      var view = SC.getPath(ReadingList,
-                             'mainPage.mainPane.splitView.topLeftView.feedView.feeds');
+      var view = ReadingList.mainPage.get('feeds');
 
       setTimeout(function () {
         SC.run(function () {
@@ -81,8 +77,7 @@ ReadingList.InboxState = SC.State.extend({
 
   entryList: SC.State.design({
     enterState: function () {
-      var view = SC.getPath(ReadingList,
-                             'mainPage.mainPane.splitView.topLeftView.feedView.entries');
+      var view = ReadingList.mainPage.get('entries');
 
       view.adjust({
         left: SC.getPath(view, 'frame.width'),
@@ -108,8 +103,7 @@ ReadingList.InboxState = SC.State.extend({
     },
 
     exitState: function () {
-      var view = SC.getPath(ReadingList,
-                             'mainPage.mainPane.splitView.topLeftView.feedView.entries');
+      var view = ReadingList.mainPage.get('entries');
 
       setTimeout(function () {
         SC.run(function () {

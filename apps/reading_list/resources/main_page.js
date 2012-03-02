@@ -8,6 +8,11 @@ require('views/feed_manager');
 require('views/card');
 
 ReadingList.mainPage = SC.Page.design({
+  manager: SC.outlet('mainPane.splitView.topLeftView.managerView'),
+  lists: SC.outlet('mainPane.splitView.topLeftView.feedView'),
+  feeds: SC.outlet('mainPane.splitView.topLeftView.feedView.feeds'),
+  entries: SC.outlet('mainPane.splitView.topLeftView.feedView.entries'),
+
   mainPane: SC.MainPane.design({
     childViews: ['splitView'],
 
