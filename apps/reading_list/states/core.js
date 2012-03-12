@@ -3,8 +3,6 @@
 // Copyright: @2012 SproutCore, Tim Evans
 // ==========================================================================
 /*globals ReadingList */
-require('states/manager');
-require('states/inbox');
 
 /**
   A statechart to manage the UI and UI actions.
@@ -18,10 +16,10 @@ ReadingList.statechart = SC.Statechart.create(
 
   autoinitStatechart: NO,
 
-  initialState: 'inbox',
+  initialState: 'reading',
 
-  inbox: SC.State.plugin('ReadingList.InboxState'),
+  reading: SC.State.plugin('ReadingList.ReadingState'),
 
-  manager: SC.State.plugin('ReadingList.FeedManagerState')
+  editing: SC.State.plugin('ReadingList.EditingState')
 
 });
