@@ -29,7 +29,7 @@ $theme.button {
 
     .sc-button-label {
       color: #000;
-      @include text-shadow(rgba(255, 255, 255, .6) 0 1px);
+      @include text-shadow(0 1px 0 rgba(255, 255, 255, .6));
     }
 
     &.active {
@@ -46,7 +46,7 @@ $theme.button {
 
     .sc-button-label {
       color: #000;
-      @include text-shadow(rgba(255, 255, 255, .6) 0 -1px);
+      @include text-shadow(0 -1px 0 rgba(255, 255, 255, .6));
     }
 
     &.active {
@@ -65,7 +65,7 @@ $theme.button {
     .sc-button-label {
       color: #FFF;
       padding-top: 0px;
-      @include text-shadow(rgba(0, 0, 0, .4) 0 -1px);
+      @include text-shadow(0 -1px 0 rgba(0, 0, 0, .4));
     }
 
     &.active {
@@ -83,7 +83,7 @@ $theme.button {
 
     .sc-button-label {
       color: #FFF;
-      @include text-shadow(rgba(0, 0, 0, .2) 0 -1px);
+      @include text-shadow(0 -1px 0 rgba(0, 0, 0, .2));
     }
 
     &.active {
@@ -101,7 +101,7 @@ $theme.button {
 
     .sc-button-label {
       color: #FFF;
-      @include text-shadow(rgba(0, 0, 0, .2) 0 -1px);
+      @include text-shadow(0 -1px 0 rgba(0, 0, 0, .2));
     }
 
     &.active {
@@ -119,7 +119,7 @@ $theme.button {
 
     .sc-button-label {
       color: #FFF;
-      @include text-shadow(rgba(0, 0, 0, .2) 0 -1px);
+      @include text-shadow(0 -1px 0 rgba(0, 0, 0, .2));
     }
 
     &.active {
