@@ -17,36 +17,32 @@ ReadingList.ReadingState = SC.State.extend({
 
     if (!reader.get('isVisible')) {
       reader.set('isVisible', YES);
-      setTimeout(function () {
-        SC.run(function () {
-          // Fade in
-          reader.animate({
-            opacity: 1
-          }, {
-            timing: 'ease-out',
-            duration: .25
-          });
+      ReadingList.scheduleAnimation(reader, function () {
+        // Fade in
+        reader.animate({
+          opacity: 1
+        }, {
+          timing: ReadingList.TIMING,
+          duration: ReadingList.DURATION
         });
-      }, 0);
+      });
     }
   },
 
   exitState: function () {
     var reader = ReadingList.mainPage.get('reader');
 
-    setTimeout(function () {
-      SC.run(function () {
-        // Fade out
-        reader.animate({
-          opacity: 0
-        }, {
-          timing: 'ease-out',
-          duration: .25
-        }, function () {
-          reader.set('isVisible', NO);
-        });
+    ReadingList.scheduleAnimation(reader, function () {
+      // Fade out
+      reader.animate({
+        opacity: 0
+      }, {
+        timing: ReadingList.TIMING,
+        duration: ReadingList.DURATION
+      }, function () {
+        reader.set('isVisible', NO);
       });
-    }, 0);
+    });
   }
 
 });

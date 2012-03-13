@@ -7,45 +7,97 @@
 ReadingList.ReadingEntriesState = SC.State.extend({
 
   enterState: function () {
-    var view = ReadingList.mainPage.get('entries');
+    var entries = ReadingList.mainPage.get('entries'),
+        content = ReadingList.mainPage.getPath('entries.content'),
+        header = ReadingList.mainPage.getPath('entries.header'),
+        footer = ReadingList.mainPage.getPath('entries.footer'),
+        width = content.get('frame').width;
 
-    view.adjust({
-      left: view.get('frame').width,
-      right: -1 * view.get('frame').width
+    content.adjust({
+      left: width,
+      right: -1 * width
     });
 
-    view.set('isVisible', YES);
-    setTimeout(function () {
+    header.adjust({
+      left: width / 20,
+      right: -1 * width / 20,
+      opacity: 0
+    });
+
+    footer.adjust({
+      left: width / 20,
+      right: -1 * width / 20,
+      opacity: 0
+    });
+
+    entries.set('isVisible', YES);
+    ReadingList.scheduleAnimation(entries, function () {
       // Translate right 100%
-      SC.run(function () {
-        view.animate({
-          left: 0,
-          right: 0
-        }, {
-          timing: 'ease-out',
-          duration: .25
-        });
+      content.animate({
+        left: 0,
+        right: 0
+      }, {
+        timing: ReadingList.TIMING,
+        duration: ReadingList.DURATION
       });
-    }, 0);
+
+      header.animate({
+        left: 0,
+        right: 0,
+        opacity: 1
+      }, {
+        timing: ReadingList.TIMING,
+        duration: ReadingList.DURATION
+      });
+
+      footer.animate({
+        left: 0,
+        right: 0,
+        opacity: 1
+      }, {
+        timing: ReadingList.TIMING,
+        duration: ReadingList.DURATION
+      });
+    });
   },
 
   exitState: function () {
-    var view = ReadingList.mainPage.get('entries');
+    var entries = ReadingList.mainPage.get('entries'),
+        content = ReadingList.mainPage.getPath('entries.content'),
+        header = ReadingList.mainPage.getPath('entries.header'),
+        footer = ReadingList.mainPage.getPath('entries.footer'),
+        width = content.get('frame').width;
 
-    setTimeout(function () {
-      SC.run(function () {
-        // Translate left 100%
-        view.animate({
-          left: view.get('frame').width,
-          right: -1 * view.get('frame').width
-        }, {
-          timing: 'ease-out',
-          duration: .25
-        }, function () {
-          view.set('isVisible', NO);
-        });
+    ReadingList.scheduleAnimation(entries, function () {
+      // Translate left 100%
+      content.animate({
+        left: width,
+        right: -1 * width
+      }, {
+        timing: ReadingList.TIMING,
+        duration: ReadingList.DURATION
+      }, function () {
+        entries.set('isVisible', NO);
       });
-    }, 0);
+
+      header.animate({
+        left: width / 20,
+        right: -1 * width / 20,
+        opacity: 0
+      }, {
+        timing: ReadingList.TIMING,
+        duration: ReadingList.DURATION
+      });
+
+      footer.animate({
+        left: width / 20,
+        right: -1 * width / 20,
+        opacity: 0
+      }, {
+        timing: ReadingList.TIMING,
+        duration: ReadingList.DURATION
+      });
+    });
   },
 
   browseFeeds: function () {

@@ -13,47 +13,100 @@ ReadingList.ReadingFeedsState = SC.State.extend({
   configuring: SC.State.plugin('ReadingList.FeedSettingsState'),
 
   enterState: function () {
-    var view = ReadingList.mainPage.get('feeds');
+    var feeds = ReadingList.mainPage.get('feeds'),
+        content = ReadingList.mainPage.getPath('feeds.content'),
+        header = ReadingList.mainPage.getPath('feeds.header'),
+        footer = ReadingList.mainPage.getPath('feeds.footer');
 
-    if (!view.get('isVisible')) {
-      view.adjust({
-        left: -1 * view.get('frame').width,
-        right: 0
+    if (!feeds.get('isVisible')) {
+      var width = content.get('frame').width;
+
+      content.adjust({
+        left: -1 * width,
+        right: width
       });
 
-      view.set('isVisible', YES);
-      setTimeout(function () {
-        SC.run(function () {
-          // Translate left 100%
-          view.animate({
-            left: 0,
-            right: 0
-          }, {
-            timing: 'ease-out',
-            duration: .25
-           });
+      header.adjust({
+        left: -1 * width / 20,
+        right: width / 20,
+        opacity: 0
+      });
+
+      footer.adjust({
+        left: -1 * width / 20,
+        right: width / 20,
+        opacity: 0
+      });
+
+      feeds.set('isVisible', YES);
+      ReadingList.scheduleAnimation(feeds, function () {
+        // Translate left 100%
+        content.animate({
+          left: 0,
+          right: 0
+        }, {
+          timing: ReadingList.TIMING,
+          duration: ReadingList.DURATION
         });
-      }, 0);
+
+        header.animate({
+          left: 0,
+          right: 0,
+          opacity: 1
+        }, {
+          timing: ReadingList.TIMING,
+          duration: ReadingList.DURATION
+        });
+
+        footer.animate({
+          left: 0,
+          right: 0,
+          opacity: 1
+        }, {
+          timing: ReadingList.TIMING,
+          duration: ReadingList.DURATION
+        });
+      });
     }
   },
 
   exitState: function () {
-    var view = ReadingList.mainPage.get('feeds');
+    var feeds = ReadingList.mainPage.get('feeds'),
+        content = ReadingList.mainPage.getPath('feeds.content'),
+        header = ReadingList.mainPage.getPath('feeds.header'),
+        footer = ReadingList.mainPage.getPath('feeds.footer'),
+        width = content.get('frame').width;
 
-    setTimeout(function () {
-      SC.run(function () {
-        // Translate right 100%
-        view.animate({
-          left: -1 * view.get('frame').width,
-          right: 0
-        }, {
-          timing: 'ease-out',
-          duration: .25
-        }, function () {
-          view.set('isVisible', NO);
-        });
+    ReadingList.scheduleAnimation(feeds, function () {
+      // Translate right 100%
+      content.animate({
+        left: -1 * width,
+        right: width
+      }, {
+        timing: ReadingList.TIMING,
+        duration: ReadingList.DURATION
+      }, function () {
+        feeds.set('isVisible', NO);
       });
-    }, 0);
+
+      header.animate({
+        left: -1 * width / 20,
+        right: width - width / 20,
+        opacity: 0
+      }, {
+        timing: ReadingList.TIMING,
+        duration: ReadingList.DURATION
+      });
+
+      footer.animate({
+        left: -1 * width / 20,
+        right: width - width / 20,
+        opacity: 0
+      }, {
+        timing: ReadingList.TIMING,
+        duration: ReadingList.DURATION
+      });
+    });
   },
 
   browseEntries: function () {
