@@ -5,4 +5,5 @@ body,
   background-color: #F1F1F1;
   @include background(linear-gradient(0, #F1F1F1 50%, #EFEFEF 50%));
   background-size: 8px;
+  -webkit-transform: none;
 }
