@@ -29,8 +29,8 @@ $theme.sc-scroller-view.sc-vertical {
     @include border-radius(4px);
     width: 8px;
     left: 2px;
-    bottom: 3px;
-    top: 4px;
+    bottom: 2px;
+    top: 2px;
   }
 
   &.active-thumb {
