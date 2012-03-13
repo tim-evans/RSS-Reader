@@ -10,7 +10,7 @@
   font sizes and serifs.
   @extend SC.ScrollView
  */
-ReadingList.PageView = SC.ScrollView.design(
+ReadingList.PageView = SC.ScrollView.extend(
   /** @scope ReadingList.PageView.prototype */{
 
   contentView: SC.View.design({
