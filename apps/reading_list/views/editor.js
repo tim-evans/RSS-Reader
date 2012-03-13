@@ -1,15 +1,18 @@
 // ==========================================================================
-// Project:   ReadingList.FeedView
+// Project:   ReadingList.EditorView
 // Copyright: @2012 Tim Evans
 // ==========================================================================
 /*globals ReadingList */
 require('views/feed_item');
 
-ReadingList.FeedManagerView = SC.View.extend({
+ReadingList.EditorView = SC.View.extend({
 
-  classNames: ['manager'],
+  // Layout above toolbars
+  layout: { zIndex: 11 },
 
-  childViews: ['header', 'manager', 'footer'],
+  classNames: ['editor'],
+
+  childViews: ['header', 'editor', 'footer'],
 
   header: SC.ToolbarView.design({
     themeName: 'matte-dark',
@@ -17,8 +20,9 @@ ReadingList.FeedManagerView = SC.View.extend({
     layout: { top: 0, height: 28 },
     childViews: ['label', 'selectAll'],
 
-    label: SC.LabelView.design(SC.AutoResize, {
-      layout: { centerY: 0, height: 20, centerX: 0, width: 10 },
+    label: SC.LabelView.design({
+      layout: { centerY: 0, height: 20, left: 0, right: 0 },
+      textAlign: SC.ALIGN_CENTER,
       classNames: ['title'],
       localize: YES,
       value: '_Remove feeds from your list'
@@ -27,23 +31,23 @@ ReadingList.FeedManagerView = SC.View.extend({
     selectAll: SC.CheckboxView.design(SC.AutoResize, {
       themeName: 'dark',
       layout: { left: 27, height: 20, centerY: 0 },
-      autoResizePadding: { width: 40 },
+      autoResizePadding: { width: 32 },
       localize: YES,
       title: '_Check All',
-      valueBinding: 'ReadingList.feedManagerController.areAllSelected'
+      valueBinding: 'ReadingList.editorController.areAllSelected'
     })
   }),
 
-  manager: SC.ScrollView.design({
+  editor: SC.ScrollView.design({
     layout: { top: 28, bottom: 33 },
     contentView: SC.ListView.design({
       rowHeight: 55,
-      contentBinding: SC.Binding.oneWay('ReadingList.feedController'),
+      contentBinding: SC.Binding.oneWay('ReadingList.feedsController'),
       exampleView: SC.View.design({
         childViews: ['item', 'checkbox'],
         item: ReadingList.FeedItemView.design({
           contentBinding: SC.Binding.oneWay('.parentView.content'),
-          layout: { left: 47 } /* 22 + 18 + 19 - 12 */
+          layout: { left: 37 } /* 22 + 18 + 19 - 12 - 10*/
         }),
         checkbox: SC.CheckboxView.design({
           layout: { zIndex: 2 },
@@ -60,12 +64,11 @@ ReadingList.FeedManagerView = SC.View.extend({
     childViews: ['remove', 'cancel'],
 
     remove: SC.ButtonView.design({
-      isEnabledBinding: SC.Binding.oneWay('ReadingList.feedManagerController.length').bool(),
+      isEnabledBinding: SC.Binding.oneWay('ReadingList.editorController.length').bool(),
       layout: { centerX: -68, width: 124, top: 3, height: 26, border: 1 },
       themeName: 'red',
-      target: 'ReadingList.statechart',
       action: 'removeSelectedFeeds',
-      titleBinding: SC.Binding.oneWay('ReadingList.feedManagerController.length'),
+      titleBinding: SC.Binding.oneWay('ReadingList.editorController.length'),
       displayTitle: function () {
         var title = this.get('title');
 
@@ -80,7 +83,6 @@ ReadingList.FeedManagerView = SC.View.extend({
       layout: { centerX: 68, width: 124, top: 3, height: 26, border: 1 },
       localize: YES,
       title: '_Cancel',
-      target: 'ReadingList.statechart',
       action: 'cancel'
     })
   })

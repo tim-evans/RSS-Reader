@@ -10,7 +10,7 @@ ReadingList.main = function main() {
   ReadingList.feedController.set('content',
     ReadingList.store.find(SC.Query.local(RSS.Feed, 'status = 513 OR status = 514')));
 
-  ReadingList.feedManagerController.set('content',
+  ReadingList.editorController.set('content',
     ReadingList.store.find(SC.Query.local(RSS.Feed, 'isSelected = true')));
 
   ReadingList.statechart.initStatechart();

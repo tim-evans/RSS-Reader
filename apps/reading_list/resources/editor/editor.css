@@ -1,4 +1,4 @@
-$theme.manager {
+$theme.editor {
   .remove.checkbox .button {
     top: 19px;
     left: 27px;
@@ -11,6 +11,7 @@ $theme.manager {
 
     .title {
       font-size: 11px;
+      line-height: 21px;
     }
   }
 

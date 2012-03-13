@@ -1,5 +1,5 @@
 // ==========================================================================
-// Project:   ReadingList.feedManagerController
+// Project:   ReadingList.editorController
 // Copyright: @2012 SproutCore, Tim Evans
 // ==========================================================================
 /*globals ReadingList */
@@ -13,8 +13,8 @@ require('controllers/feed');
 
   @extends SC.ArrayController
  */
-ReadingList.feedManagerController = SC.ArrayController.create(
-  /** @scope ReadingList.feedManagerController.prototype */{
+ReadingList.editorController = SC.ArrayController.create(
+  /** @scope ReadingList.editorController.prototype */{
 
   /**
     The content of this controller is every feed that has
@@ -29,7 +29,7 @@ ReadingList.feedManagerController = SC.ArrayController.create(
     @field
     @type Number
    */
-  totalFeedsBinding: SC.Binding.oneWay('ReadingList.feedController.length'),
+  totalFeedsBinding: SC.Binding.oneWay('ReadingList.feedsController.length'),
 
   /**
     Whether all feeds are currently selected in the manager.
@@ -39,7 +39,7 @@ ReadingList.feedManagerController = SC.ArrayController.create(
    */
   areAllSelected: function (k, v) {
     if (v !== undefined) {
-      ReadingList.feedController.setEach('isSelected', v);
+      ReadingList.feedsController.setEach('isSelected', v);
     }
     return this.get('length') === this.get('totalFeeds');
   }.property('length', 'totalFeeds').cacheable()

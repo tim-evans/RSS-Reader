@@ -4,14 +4,14 @@
 // ==========================================================================
 /*globals ReadingList */
 require('views/feed');
-require('views/feed_manager');
+require('views/editor');
 require('views/card');
 
 ReadingList.mainPage = SC.Page.design({
-  manager: SC.outlet('mainPane.splitView.topLeftView.managerView'),
   lists: SC.outlet('mainPane.splitView.topLeftView.feedView'),
   feeds: SC.outlet('mainPane.splitView.topLeftView.feedView.feeds'),
   entries: SC.outlet('mainPane.splitView.topLeftView.feedView.entries'),
+  editor: SC.outlet('mainPane.splitView.topLeftView.editor'),
 
   mainPane: SC.MainPane.design({
     childViews: ['splitView'],
@@ -22,11 +22,11 @@ ReadingList.mainPage = SC.Page.design({
       topLeftMinThickness: 400,
       defaultThickness: 400,
       topLeftView: SC.View.design({
-        childViews: ['feedView', 'managerView'],
         feedView: ReadingList.FeedView.design({
+        childViews: ['feedView', 'editor'],
           isVisible: YES
         }),
-        managerView: ReadingList.FeedManagerView.design({
+        editor: ReadingList.EditorView.design({
           isVisible: NO
         })
       }),
