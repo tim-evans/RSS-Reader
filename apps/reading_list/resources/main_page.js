@@ -16,6 +16,8 @@ ReadingList.mainPage = SC.Page.design({
   mainPane: SC.MainPane.design({
     childViews: ['splitView'],
 
+    defaultResponder: 'ReadingList.statechart',
+
     splitView: SC.SplitView.design({
       dividerThickness: 1,
       canCollapseViews: NO,
