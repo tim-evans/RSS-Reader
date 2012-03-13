@@ -1,4 +1,15 @@
+/**
+  OSX Lion style scrollbars.
+ */
 SC.ScrollerView.reopen({
+
+  scrollbarThickness: 12,
+
+  buttonLength: 5,
+
+  capLength: 12,
+
+  hasButtons: NO,
 
   render: function (original, context, firstTime) {
     if (!this._suppressActiveChecks) {
@@ -20,8 +31,8 @@ SC.ScrollerView.reopen({
       this._suppressActiveChecks = NO;
     }
 
-    context.setClass('active-track', this._thumbDragging || this._isTrackActive);
-    context.setClass('active-thumb', this._thumbDragging || this._isThumbActive);
+    context.setClass('active-track', !!(this._thumbDragging || this._isTrackActive));
+    context.setClass('active-thumb', !!(this._thumbDragging || this._isThumbActive));
     return original(context, firstTime);
   }.enhance(),
 
@@ -62,13 +73,6 @@ SC.ScrollerView.reopen({
       this.displayDidChange();
     }
   }.enhance()
-});
-
-SC.mixin(SC.ScrollerView.prototype, {
-  scrollbarThickness: 12,
-  buttonLength: 6,
-  capLength: 14,
-  hasButtons: NO
 });
 
 SC.mixin(SC.ScrollView.prototype, {
