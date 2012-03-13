@@ -3,15 +3,15 @@
 // Copyright: @2012 Tim Evans
 // ==========================================================================
 /*globals ReadingList */
-require('views/feed');
+require('views/reader');
 require('views/editor');
 require('views/card');
 
 ReadingList.mainPage = SC.Page.design({
-  lists: SC.outlet('mainPane.splitView.topLeftView.feedView'),
-  feeds: SC.outlet('mainPane.splitView.topLeftView.feedView.feeds'),
-  entries: SC.outlet('mainPane.splitView.topLeftView.feedView.entries'),
   editor: SC.outlet('mainPane.splitView.topLeftView.editor'),
+  reader: SC.outlet('mainPane.splitView.topLeftView.reader'),
+  feeds: SC.outlet('mainPane.splitView.topLeftView.reader.feeds'),
+  entries: SC.outlet('mainPane.splitView.topLeftView.reader.entries'),
 
   mainPane: SC.MainPane.design({
     childViews: ['splitView'],
@@ -22,8 +22,20 @@ ReadingList.mainPage = SC.Page.design({
       topLeftMinThickness: 400,
       defaultThickness: 400,
       topLeftView: SC.View.design({
-        feedView: ReadingList.FeedView.design({
-        childViews: ['feedView', 'editor'],
+        childViews: ['reader', 'editor', 'topToolbar', 'bottomToolbar'],
+        classNames: ['reader'],
+
+        // Here for styling purposes-
+        // UI will be overlaid on top of this
+        topToolbar: SC.ToolbarView.design({
+          layout: { top: 0, height: 39, borderBottom: 1 }
+        }),
+
+        bottomToolbar: SC.ToolbarView.design({
+          layout: { bottom: 0, height: 33, borderTop: 1 }
+        }),
+
+        reader: ReadingList.ReaderView.design({
           isVisible: YES
         }),
         editor: ReadingList.EditorView.design({
