@@ -1,0 +1,31 @@
+@import "compass/css3/transition";
+
+@-webkit-keyframes fade-in {
+  from {
+    background-color: rgba(0, 0, 0, 0);
+  }
+
+  to {
+    background-color: rgba(0, 0, 0, .5);
+  }
+}
+
+@-moz-keyframes fade-in {
+  from {
+    background-color: rgba(0, 0, 0, 0);
+  }
+
+  to {
+    background-color: rgba(0, 0, 0, .5);
+  }
+}
+
+$theme.sc-modal {
+  -webkit-animation: fade-in 0.25s ease-in-out;
+  -moz-animation: fade-in 0.25s ease-in-out;
+
+  background-color: rgba(0, 0, 0, .5);
+  .ie8 &{
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#7F000000', endColorstr='#7F000000');
+  }
+}

@@ -1,0 +1,61 @@
+@import "compass/css3/border-radius";
+@import "compass/css3/box-shadow";
+@import "compass/css3/text-shadow";
+
+@-webkit-keyframes popup {
+  from {
+    -webkit-transform: scale(0);
+  }
+
+  33% {
+    -webkit-transform: scale(1.05);
+  }
+
+  66% {
+    -webkit-transform: scale(.95);
+  }
+
+  to {
+    -webkit-transform: scale(1);
+  }
+}
+
+@-moz-keyframes popup {
+  from {
+    -moz-transform: scale(0);
+  }
+
+  33% {
+    -moz-transform: scale(1.05);
+  }
+
+  66% {
+    -moz-transform: scale(.95);
+  }
+
+  to {
+    -moz-transform: scale(1);
+  }
+}
+
+$theme.panel {
+  @include border-radius(10px);
+  @include box-shadow(rgba(0, 0, 0, 0.4) 0 4px 8px);
+  background-color: rgba(0, 0, 0, 0.9);
+  background-size: 2px 2px;
+  background-position: 0 0, 1px 1px;
+  border-color: #000;
+  -webkit-animation: popup 0.5s ease-in-out;
+  -moz-animation: popup 0.5s ease-in-out;
+  -webkit-font-smoothing: antialiased;
+
+  .ie8 &{
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#E5000000', endColorstr='#E5000000');
+  }
+
+  .title {
+    font-size: 18px;
+    font-weight: bold;
+    @include single-text-shadow(rgba(0, 0, 0, 0.4), 0, -1px, 0);
+  }
+}
