@@ -1,74 +1,8 @@
-ReadingList.SearchCriterionView = SC.View.extend(
-  /** @scope ReadingList.SearchCriterionView.prototype */{
+require('views/tag');
+require('mixins/selection_support');
 
-  /**
-    Use <span> tags as the wrapper.
-    @type String
-    @default 'span'
-    @see SC.View#tagName
-   */
-  tagName: 'span',
-
-  /**
-    CSS class names to apply to this view.
-    @type String[]
-    @default ['criterion']
-    @see SC.View#classNames
-   */
-  classNames: ['criterion'],
-
-  /**
-    The type of the search criterion.
-    @type String
-    @default null
-   */
-  type: null,
-
-  /**
-    The value of the search criterion.
-    @type String
-    @default null
-   */
-  value: null,
-
-  /**
-    Whether this is selected or not.
-    @type
-    @default null
-   */
-  isSelected: null,
-
-  /**
-    A pill has two parts to render
-    and will be styled to note that the
-    two parts are related.
-    @type String
-    @default 'pill'
-   */
-  themeName: 'pill',
-
-  render: function (context) {
-    context.push('<span class="head">' + this.get('type').loc() + '</span>');
-    context.push('<span class="tail">' + this.get('value').loc() + '</span>');
-  },
-
-  update: function ($) {
-    $.setClass('isSelected', this.get('isSelected'));
-
-    if (this.didChangeFor(K, 'type')) {
-      $.find('.head').html(this.get('type'));
-    }
-
-    if (this.didChangeFor(K, 'value')) {
-      $.find('.tail').html(this.get('value'));
-    }
-  }
-
-});
-
-
-ReadingList.SearchView = SC.View.extend(
-  /** @scope ReadingList.SearchView.prototype */{
+SC.SearchView = SC.View.extend(
+  /** @scope SC.SearchView.prototype */{
 
   /** @private
     Lazily instantiate variables here.
@@ -141,6 +75,13 @@ ReadingList.SearchView = SC.View.extend(
   useCommasAsDelimiters: YES,
 
   /**
+    @type Boolean
+    @default YES
+    @see SC.View#acceptsFirstResponder
+   */
+  acceptsFirstResponder: YES,
+
+  /**
     The hint to show when there is nothing provided as input.
     @type String
     @default
@@ -151,19 +92,65 @@ ReadingList.SearchView = SC.View.extend(
     The example view to use when rendering the items in this field.
     @type SC.View
    */
-  exampleView: ReadingList.SearchCriterionView.design({
-    typeBinding: '*content.type',
+  exampleView: SC.TagView.design({
     valueBinding: '*content.value'
   }),
 
   /**
     The search criterion that the user has provided.
-    @extend SC.CollectionView
+    @extend SC.View
    */
-  items: SC.CollectionView.design({
+  items: SC.View.design(
+    SC.SelectionSupport, {
+    classNames: ['items'],
     layout: { height: 26 },
     contentBinding: SC.Binding.oneWay('.parentView*content'),
-    exampleView: SC.outlet('parentView.exampleView')
+    exampleView: SC.outlet('parentView.exampleView'),
+
+    contentKey: 'content',
+    applySelectionToViews: YES,
+
+    init: function () {
+      sc_super();
+      this.contentDidChange();
+    },
+
+    contentDidChange: function () {
+      var content = this.get('content'),
+          oldContent = this._content,
+          func = this.enumerableContentDidChange;
+
+      if (oldContent) {
+        oldContent.removeObserver('[]', this, func);
+      }
+
+      if (content) {
+        content.addObserver('[]', this, func);
+      }
+
+      this._content = content;
+      this.enumerableContentDidChange();
+    }.observes('content'),
+
+    enumerableContentDidChange: function () {
+      var exampleView = this.get('exampleView'),
+          content = this.get('content'),
+          len = content ? content.get('length') : 0,
+          childViews = [],
+          i;
+
+      childViews = [];
+
+      for (i = 0; i < len; i++) {
+        childViews[i] = exampleView.create({
+          parentView: this,
+          contentIndex: i,
+          content: content.objectAt(i)
+        });
+      }
+
+      this.replaceAllChildren(childViews);
+    }
   }),
 
   /** @private
@@ -172,9 +159,10 @@ ReadingList.SearchView = SC.View.extend(
   didCreateItem: function (view) {
     var field = this.get('field'),
         layout = field.get('layout'),
-        width = view.$().outerWidth();
+        width = view.$().outerWidth(),
+        tWidth = layout.left + width + this.get('padding');
 
-    field.adjust('left', layout.left + width + this.get('padding'));
+    field.adjust('left', tWidth);
     view._width = width;
     this.invokeLast(this._sv_adjustScrollOffset);
   },
@@ -185,9 +173,10 @@ ReadingList.SearchView = SC.View.extend(
   willDestroyItem: function (view) {
     var field = this.get('field'),
         layout = field.get('layout'),
-        width = view._width;
+        width = view._width,
+        tWidth = layout.left - width - this.get('padding');
 
-    field.adjust('left', layout.left - width - this.get('padding'));
+    field.adjust('left', tWidth);
     this.invokeLast(this._sv_adjustScrollOffset);
   },
 
@@ -197,9 +186,38 @@ ReadingList.SearchView = SC.View.extend(
         padding = this.get('padding');
 
     if ((layout.left + layout.width) > width) {
-      this.$().scrollLeft(layout.left - width + layout.width + padding);
+      this.get('layer').scrollLeft = layout.left - width + layout.width + padding;
     }
   },
+
+  /** @private */
+  _sc_selectionCursorPositionDidChange: function () {
+    var items = this.get('items'),
+        cursor = items.get('selectionCursorPosition'),
+        lastCursor = items.previousSelectableIndexFor(null),
+        layer = this.get('layer');
+
+    if (cursor != null && cursor % 1 === 0 && layer) {
+      var view = items.childViewForContentIndex(cursor),
+          cFrame = view.get('frame'),
+          frame = this.get('frame'),
+          padding = this.get('padding');
+
+      // Extra padding for last cursor so users can see the text field.
+      if (lastCursor === cursor) {
+        padding *= 16;
+      }
+
+      // Adjust scroll position
+      if (cFrame) {
+        if (cFrame.x < 0) {
+          layer.scrollLeft += cFrame.x - padding;
+        } else if ((cFrame.x + cFrame.width + padding) > frame.width) {
+          layer.scrollLeft += cFrame.x + cFrame.width - frame.width + padding;
+        }
+      }
+    }
+  }.observes('.items*selectionCursorPosition'),
 
   field: SC.TextFieldView.design(SC.AutoResize, {
 
@@ -261,10 +279,11 @@ ReadingList.SearchView = SC.View.extend(
       this.setIfChanged('shouldAutoResize', YES);
 
       var code = evt.commandCodes()[0],
+          view = this.get('parentView'),
           key = (evt.which === SC.Event.KEY_RETURN)
                 ? 'return'                
                 : String.fromCharCode(evt.which),
-          useCommasAsDelimiters = this.getPath('parentView.useCommasAsDelimiters');
+          useCommasAsDelimiters = view.get('useCommasAsDelimiters');
 
       // Deal with IME input
       if (useCommasAsDelimiters &&
@@ -274,7 +293,7 @@ ReadingList.SearchView = SC.View.extend(
             idx;
 
         while ((idx = value.indexOf(uniComma)) !== -1) {
-          this.get('parentView').createItem(value.slice(0, idx));
+          view.createItem(value.slice(0, idx));
           value = value.slice(idx + 1);
         }
         this.set('value', value);
@@ -283,16 +302,16 @@ ReadingList.SearchView = SC.View.extend(
 
       // Forward any event that matches the specified
       // key pattern to the popup suggestion pane
-      if (ReadingList.SearchView.PANE_KEYS.indexOf(code) !== -1) {
-        var pane = this.getPath('parentView.pane');
+      if (SC.SearchView.PANE_KEYS.indexOf(code) !== -1) {
+        var pane = view.get('pane');
         if (pane && pane.get('isPaneAttached')) {
           return pane.keyDown(evt);
         }
       }
 
       if (useCommasAsDelimiters &&
-          ReadingList.SearchView.COMMAS.indexOf(evt.which) !== -1) {
-        this.get('parentView').createItem(this.get('value'));
+          SC.SearchView.COMMAS.indexOf(evt.which) !== -1) {
+        view.createItem(this.get('value'));
         this.set('value', '');
         evt.preventDefault();
         evt.stopPropagation();
@@ -300,11 +319,11 @@ ReadingList.SearchView = SC.View.extend(
 
       // Forward any event that matches the specified key pattern
       // when at the beginning of the text field OR the text field's empty
-      } else if (ReadingList.SearchView.FORWARDING_KEYS.indexOf(code) !== -1 &&
+      } else if (SC.SearchView.FORWARDING_KEYS.indexOf(code) !== -1 &&
                  (this.get('value') === '' ||
                  (this.get('cursorPosition') === 0 && this.get('textSelectionLength')))) {
-        this.get('parentView').becomeFirstResponder();
-        return this.get('parentView').keyDown(evt);
+        view.becomeFirstResponder();
+        return view.keyDown(evt);
       }
 
       return sc_super();
@@ -314,7 +333,7 @@ ReadingList.SearchView = SC.View.extend(
       Show hint when the hint is enabled.
      */
     _sv_showHint: function () {
-      if (this._hintON) {
+      if (this._hintON || this.get('shouldShowHint')) {
         this.setIfChanged('shouldAutoResize', NO);
         this.set('layout', { left: 0, right: 0, top: 0, bottom: 0 });
       } else {
@@ -326,45 +345,112 @@ ReadingList.SearchView = SC.View.extend(
 
   createItem: function (text) {
     this.get('content').pushObject(SC.Object.create({
-      type: '_Any',
       value: text
     }));
   },
 
   keyDown: function (evt) {
-    var code = evt.commandCodes()[0];
+    var code = evt.commandCodes()[0],
+        items = this.get('items'),
+        extend = evt.shiftKey,
+        selection = items.get('selection'),
+        sLength = selection.get('length'),
+        content = this.get('content'),
+        responder,
+        defaultResponder = this.get('field'),
+        handled = YES;
+
+    if (SC.browser.mozilla && (evt.which === 17 || evt.which === 18)) {
+      code = 'meta_';
+    }
+
+    // Shift mutates the action, but doesn't define it
+    code = code && code.replace('shift_', '');
+    items.set('useAnchoredSelection', extend);
 
     switch (code) {
     // Select previous item
     case 'left':
     case 'ctrl_b':
+      if (!items.selectPrevious(extend) && !extend) {
+        items.selectFirst();
+      }
       break;
     // Select next item or focus the text field
     case 'right':
     case 'ctrl_f':
+      if (!items.selectNext(extend) && !extend) {
+        items.deselectAll();
+        responder = this.get('field');
+      }
       break;
     // Select the first item
     case 'ctrl_a':
+      items.selectFirst(extend);
       break;
-    // Select the last item
+    // Select the text field
+    case 'up':
     case 'ctrl_e':
+      responder = this.get('field');
+      items.deselectAll();
       break;
     // Backward-delete one item
     case 'backspace':
+      selection && selection.toArray().forEach(function (toRemove) {
+        content.removeObject(toRemove);
+      });
+
+      if (sLength > 1 || !(items.selectPrevious() || items.selectNext())) {
+        responder = defaultResponder;
+      }
       break;
     // Forward-delete one item
     case 'delete':
     case 'ctrl_d':
+      selection && selection.toArray().forEach(function (toRemove) {
+        content.removeObject(toRemove);
+      });
+
+      if (sLength > 1 || !(items.selectNext() || items.selectPrevious())) {
+        responder = defaultResponder;
+      }
       break;
     // Kill all items after the focused item
     case 'ctrl_k':
+      responder = defaultResponder;
+      var cursor = items.get('selectionCursorPosition');
+      if (cursor == null) cursor = -1;
+
+      while (cursor !== -1 && cursor < content.get('length')) {
+        content.removeAt(cursor);
+      }
       break;
+    // Focus the text field if any non meta keys were pressed
+    // and forward all other events to the browser
+    default:
+      if (!evt.ctrlKey && !evt.metaKey) {
+        responder = this.get('field');
+        items.deselectAll();
+      } else {
+        handled = NO;
+      }
     }
+
+    // reverse tab.
+    if (code === 'tab' && evt.shiftKey) return YES;
+
+    if (responder) {
+      evt.preventDefault();
+      evt.stopPropagation();
+      responder.becomeFirstResponder();
+    }
+
+    return handled;
   }
 });
 
-ReadingList.SearchView.mixin(
-  /** @scope ReadingList.SearchView */{
+SC.SearchView.mixin(
+  /** @scope SC.SearchView */{
 
   COMMAS: [44, 1548], // ',' and Arabic comma
   FORWARDING_KEYS: ['left', 'meta_b', 'ctrl_b', 'ctrl_a', 'meta_a', 'backspace'],

@@ -5,7 +5,8 @@ $theme.search-field {
   background-color: #FFF;
   @include background-image(linear-gradient(#DDD 0%, rgba(255, 255, 255, 0) 22%, rgba(255, 255, 255, 0)));
 
-  .sc-collection-view {
+  .items {
+    padding-top: 3px;
     background-color: transparent;
     overflow: visible;
     white-space: nowrap;
@@ -32,9 +33,5 @@ $theme.search-field {
     input {
       box-shadow: none;
     }
-  }
-
-  .criterion {
-    padding-top: 3px;
   }
 }

@@ -14,5 +14,6 @@ $theme.tag {
   &.sel {
     color: #FFF;
     background-color: #0081CA;
+    border: 1px solid #0081CA;
   }
 }
