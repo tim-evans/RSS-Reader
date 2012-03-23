@@ -19,15 +19,19 @@
   manage the selection. By default, `contentKey` is set to `"arrangedObjects"`
   to make `SC.ArrayController` work out-of-the-box with it well.
 
-  `SC.SelectionSupport` also allows selection extensions where items
-  are selected in groups based off an anchor.
+  `SC.SelectionSupport` provides simple selection functions that abstract away
+  `SC.SelectionSet`s to allow programatically selecting items in an enumerable
+  straightforward.
+  
+  It also has an option to proxy the `isSelected` property to mapped child
+  views.
 
   @since SproutCore 1.0
  */
 SC.SelectionSupport = {
 
   /**
-    The content key to observe changes apply selections to.
+    The content key that the selection is being applied to.
 
     @type String
     @default 'arrangedObjects'
@@ -94,8 +98,11 @@ SC.SelectionSupport = {
   /**
     An index set of content indicies that
     are unselectable.
+
+    @type SC.IndexSet
+    @default SC.IndexSet.EMPTY
    */
-  unselectableIndicies: SC.IndexSet.create(),
+  unselectableIndicies: SC.IndexSet.EMPTY,
 
   /**
     The content index where the selection cursor is.
