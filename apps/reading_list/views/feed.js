@@ -44,7 +44,6 @@ ReadingList.FeedView = SC.View.extend({
       rowHeight: 55,
       contentBinding: SC.Binding.oneWay('ReadingList.feedsController'),
       selectionBinding: 'ReadingList.feedsController.selection',
-      actOnSelect: YES,
       action: 'browseEntries',
       exampleView: ReadingList.FeedItemView
     })
