@@ -13,6 +13,47 @@
 ReadingList.PageView = SC.ScrollView.extend(
   /** @scope ReadingList.PageView.prototype */{
 
+  /** @private
+    Notify that the frame has changed repeatedly until
+    all images have loaded so we can scroll.
+   */
+  didAppendToDocument: function () {
+    var contentView = this.getPath('containerView.contentView'),
+        self = this,
+        $images = contentView.$('img');
+
+    if ($images.length) {
+      this._timer = SC.Timer.schedule({
+        target: this,
+        action: '_didReflow',
+        interval: 100,
+        repeats: YES
+      });
+
+      $images.bind('load', function () {
+        SC.run(function () {
+          if (self._timer) self._timer.invalidate();
+          self._timer = null;
+          self._didReflow();
+        });
+      });
+    }
+  },
+
+  /** @private
+    Notify the scroll view that it reflowed
+   */
+  _didReflow: function () {
+    this.notifyPropertyChange('frame');
+  },
+
+  /** @private
+    Remove the outstanding timer if necessary.
+   */
+  willDestroyLayer: function () {
+    if (this._timer) this._timer.invalidate();
+  },
+
   contentView: SC.View.design({
 
     classNames: ['page'],
