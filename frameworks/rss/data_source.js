@@ -61,6 +61,8 @@ RSS.DataSource = SC.DataSource.extend(
         key = this.get('apiKey'),
         self = this;
 
+    id = id || store.readDataHash(storeKey).feedUrl;
+
     if (SC.guidFor(recordType) === SC.guidFor(RSS.Feed)) {
       $.getJSON(this.get('url') + 'load' +
                 '?v=1.0' +

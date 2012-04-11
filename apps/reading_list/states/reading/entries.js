@@ -102,6 +102,10 @@ ReadingList.ReadingEntriesState = SC.State.extend({
 
   browseFeeds: function () {
     this.gotoState('feeds.browsing');
+  },
+
+  refresh: function () {
+    ReadingList.feedController.get('content').refresh();
   }
 
 });
