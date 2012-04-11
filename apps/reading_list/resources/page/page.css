@@ -16,6 +16,10 @@ $theme.page {
     }
   }
 
+  &> img, &> iframe {
+    margin-bottom: 1em !important;
+  }
+
   img, iframe {
     display: block;
     margin: 0 auto;
