@@ -10,39 +10,63 @@ $theme.sc-scroller-view.sc-vertical {
 
   .thumb {
     width: 8px;
+    left: 50%;
+    margin-left: -3px;
   }
 
   .thumb .thumb-center {
-    @include transition-duration(.15s);
     width: 8px;
     background-image: none;
-    opacity: 0;
-    background-color: rgba(0, 0, 0, .5);
+    background-color: rgba(0, 0, 0, .35);
     @include box-shadow(#FFF 0 0 3px 0);
     @include border-radius(4px);
-    right: -2px;
     top: 4px;
   }
 
   .track {
-    @include transition-duration(.15s);
-    @include border-radius(4px);
-    width: 8px;
-    left: 2px;
-    bottom: 2px;
-    top: 2px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    top: 0px;
+    @include box-shadow(rgba(0, 0, 0, .15) 0 0 6px 0 inset);
+    background-color: rgba(220, 220, 220, .1);
+    border-left: 1px solid #E4E4E4;
   }
 
-  &.active-thumb {
-    .thumb .thumb-center {
-      opacity: 1;
+  .sc-scroll-view.hide-scrollbars > &{
+    .thumb {
+      margin-left: -4px;
     }
-  }
 
-  &.active-track {
+    .thumb .thumb-center {
+      @include transition-duration(.15s);
+      opacity: 0;
+      background-color: rgba(0, 0, 0, .5);
+    }
+
     .track {
-      @include box-shadow(rgba(0, 0, 0, .25) 0 0 6px 0 inset);
-      background-color: rgba(200, 200, 200, .3);
+      @include transition-duration(.15s);
+      @include border-radius(4px);
+      width: 8px;
+      left: 2px;
+      bottom: 2px;
+      top: 2px;
+      @include box-shadow(none);
+      background-color: transparent;
+      border-left: 0px;
+    }
+
+    &.active-thumb {
+      .thumb .thumb-center {
+        opacity: 1;
+      }
+    }
+
+    &.active-track {
+      .track {
+        @include box-shadow(rgba(0, 0, 0, .25) 0 0 6px 0 inset);
+        background-color: rgba(200, 200, 200, .3);
+      }
     }
   }
 }

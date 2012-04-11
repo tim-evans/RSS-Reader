@@ -3,7 +3,7 @@
  */
 SC.ScrollerView.reopen({
 
-  scrollbarThickness: 12,
+  scrollbarThickness: SC.platform.get('scrollbarSize') === 0 ? 12 : 15,
 
   buttonLength: 5,
 
@@ -66,8 +66,8 @@ SC.ScrollerView.reopen({
   },
 
   mouseUp: function (original, evt) {
-    var wasDraggingThumb = this._thumbDragging,
-        ret = original(evt);
+    var wasDraggingThumb = this._thumbDragging;
+    original(evt);
     if (wasDraggingThumb && !this._thumbDragging) {
       this._suppressActiveChecks = YES;
       this.displayDidChange();
@@ -76,5 +76,6 @@ SC.ScrollerView.reopen({
 });
 
 SC.mixin(SC.ScrollView.prototype, {
-  verticalOverlay: YES
+  verticalOverlay: SC.platform.get('scrollbarSize') === 0,
+  classNameBindings: ['verticalOverlay:hide-scrollbars']
 });
