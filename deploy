@@ -1,0 +1,23 @@
+#!/bin/sh
+#
+# Deploy script for hosting tagged versions of the todos app on github.
+#
+# Simply run ./deploy and it will checkout gh-pages, update it's references
+# and create a directory (and built app) for each tag.
+#
+
+git stash
+git checkout gh-pages
+git reset --hard origin/master
+
+rm -rf tmp
+echo "Building RSS-Reader..."
+sc-build reading_list
+build_number=$(sproutcore build-number reading_list)
+cp -R tmp/build/reading_list/static ./
+cp static/reading_list/en/$build_number/index.html ./
+
+git commit -m "Host reading list on Github"
+
+git checkout master
+git stash apply
