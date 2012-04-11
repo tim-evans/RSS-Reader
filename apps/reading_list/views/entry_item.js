@@ -7,8 +7,10 @@ ReadingList.EntryItemView = SC.View.extend({
   render: function (context) {
     var content = this.getPath('content'),
         title = SC.get(content, 'title'),
-        author = SC.getPath(content, 'author.fullName'),
+        author = SC.getPath(content, 'author.fullName') || '',
         published = SC.get(content, 'published').toLocaleDateString();
+
+    if (author == null) author = '';
 
     context.setClass('sel', this.get('isSelected'));
     context.push('<span class="title ellipsis"><span>' + title + '</span></span>',
@@ -26,6 +28,8 @@ ReadingList.EntryItemView = SC.View.extend({
           title = SC.get(content, 'title'),
           author = SC.getPath(content, 'author.fullName'),
           published = SC.get(content, 'published').toLocaleDateString();
+
+      if (author == null) author = '';
 
       $.find('.title span').html(title);
       $.find('.detail').html(author);
