@@ -105,7 +105,20 @@ ReadingList.ReadingEntriesState = SC.State.extend({
   },
 
   refresh: function () {
-    ReadingList.feedController.get('content').refresh();
+    var feed = ReadingList.feedController.get('content');
+    feed.refresh(YES, this.didRefreshFeed(feed.get('feedUrl')));
+  },
+
+  /**
+    Update the content of the feedController since
+    `entries` gets replaced as soon as the `refresh`
+    finishes. This makes the refresh system seamless.
+   */
+  didRefreshFeed: function (id) {
+    return function () {
+      ReadingList.feedController.set('content',
+        ReadingList.store.find(RSS.Feed, id));
+    };
   }
 
 });

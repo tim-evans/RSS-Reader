@@ -15,6 +15,10 @@ RSS.Feed = SC.Record.extend(
 
   description: SC.Record.attr(String),
 
+  lastUpdated: SC.Record.attr(Date, {
+    useIsoDate: NO
+  }),
+
   entries: SC.Record.toMany('RSS.Entry', {
     isNested: YES
   })

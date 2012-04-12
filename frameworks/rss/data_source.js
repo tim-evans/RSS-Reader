@@ -74,6 +74,7 @@ RSS.DataSource = SC.DataSource.extend(
                 '&callback=?', function (result) {
         SC.run(function () {
           if (result.responseStatus === 200) {
+            result.responseData.feed.lastUpdated = new Date();
             store.dataSourceDidComplete(storeKey, result.responseData.feed, id);
             self.extractMetadata(store, result.responseData.feed.entries);
 

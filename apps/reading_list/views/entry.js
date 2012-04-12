@@ -4,6 +4,7 @@
 // ==========================================================================
 /*globals ReadingList */
 require('views/entry_item');
+require('views/refresher');
 
 ReadingList.EntryView = SC.View.extend({
 
@@ -41,9 +42,10 @@ ReadingList.EntryView = SC.View.extend({
     },
 
     noEntriesView: SC.LabelView.design({
-      isVisibleBinding: SC.Binding.oneWay('ReadingList.feedsController.length').not(),
+      isVisibleBinding: SC.Binding.oneWay('ReadingList.entriesController.length').not(),
       layout: { left: .15, right: .15, top: .15, zIndex: 2 },
-      value: '_You currently have no feeds to read'
+      localize: YES,
+      value: "_There's nothing to read."
     }),
 
     contentView: SC.SourceListView.design({
@@ -56,6 +58,13 @@ ReadingList.EntryView = SC.View.extend({
   }),
 
   footer: SC.View.design({
-     layout: { bottom: 0, height: 32, zIndex: 11 }
+    layout: { bottom: 0, height: 32, zIndex: 11 },
+    classNames: ['toolbar'],
+    childViews: ['refresher'],
+
+    refresher: ReadingList.RefresherView.design({
+      action: 'refresh',
+      lastUpdatedBinding: SC.Binding.oneWay('ReadingList.feedController*lastUpdated')
+    })
   })
 });

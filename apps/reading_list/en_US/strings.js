@@ -20,6 +20,9 @@ SC.stringsFor('en_US', {
   // Settings
   "_Settings": "Settings",
   "_Show feed icons": "Show feed icons",
-  "_Done": "Done"
+  "_Done": "Done",
+
+  // Refresh
+  "_Last updated on %@": "<span class='icon'>&#8635;</span> <span class='detail'>Last updated on %{date:MMMM} %{date:d}, %{date:h}:%{date:mm} %{date:a}, %{date:yyyy}</span>"
 
 });
