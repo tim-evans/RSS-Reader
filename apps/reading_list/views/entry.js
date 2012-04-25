@@ -51,9 +51,16 @@ ReadingList.EntryView = SC.View.extend({
     contentView: SC.SourceListView.design({
       layout: { top: 0, left: 0, right: 0, bottom: 0 },
       rowHeight: 55,
-      contentBinding: SC.Binding.oneWay('ReadingList.entriesController'),
+      contentDelegate: SC.outlet('entriesController', ReadingList),
+      rowDelegate: SC.outlet('entriesController', ReadingList),
+      contentBinding: SC.Binding.oneWay('ReadingList.entriesController.arrangedObjects'),
       selectionBinding: 'ReadingList.entriesController*selection',
-      exampleView: ReadingList.EntryItemView
+      rowSpacing: 1,
+      exampleView: ReadingList.EntryItemView,
+      groupExampleView: SC.LabelView.design({
+        localize: YES,
+        valueBinding: SC.Binding.oneWay('.content')
+      })
     })
   }),
 

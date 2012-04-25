@@ -10,6 +10,12 @@ SC.stringsFor('en_US', {
   "_Go Back": "Go Back",
   "_Add a new feed": "Add a new feed",
 
+  // Times
+  "_Today": "Today",
+  "_Yesterday": "Yesterday",
+  "_Last Week": "Last Week",
+  "_Older": "Older",
+
   // Feed Manager
   "_Check All": "Check All",
   "_Remove feeds from your list": "Remove feeds from your list",

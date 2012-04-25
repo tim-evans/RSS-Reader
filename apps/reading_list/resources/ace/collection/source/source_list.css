@@ -14,5 +14,16 @@
         color: #FFF;
       }
     }
+
+    .sc-group-item {
+      background-color: whiteSmoke;
+      border-bottom: 1px solid #EEE !important;
+      color: #BBB;
+      font-size: 12px;
+      line-height: 20px;
+      font-weight: bold;
+      text-shadow: #FFF -1px 0 1px;
+      text-transform: uppercase;
+    }
   }
 }

@@ -3,6 +3,7 @@
 @import "compass/css3/transition";
 
 $theme.sc-scroller-view.sc-vertical {
+  z-index: 100;
   .track, .cap, .endcap,
   .thumb .thumb-top, .thumb .thumb-bottom {
     background: transparent;
