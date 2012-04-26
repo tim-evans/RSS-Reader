@@ -16,7 +16,7 @@ ReadingList = SC.Application.create(
   VERSION: '0.1.0',
 
   TIMING: 'ease-out',
-  DURATION: .25,
+  DURATION: .2,
 
   _buffer: [],
 
