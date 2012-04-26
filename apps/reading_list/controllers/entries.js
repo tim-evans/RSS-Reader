@@ -10,8 +10,13 @@ ReadingList.entriesController = SC.ArrayController.create(
     return this._groupIndicies;
   },
 
+  /**
+    Sometimes the collection view is bad and tries to
+    render old content when `arrangedObjects` has
+    already updated.
+   */
   contentIndexIsGroup: function (view, content, idx) {
-    return this._groupIndicies.contains(idx);
+    return typeof content.objectAt(idx) === "string";
   },
 
   customRowHeightIndexes: function () {
