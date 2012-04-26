@@ -1,0 +1,61 @@
+<!DOCTYPE html><html class="no-js" lang="en"><head><meta http-equiv="X-UA-Compatible" content="IE=edge"><script>var SC_benchmarkPreloadEvents={headStart:new Date().getTime()};var docElem=window.documentElement||document.documentElement;
+if(docElem){docElem.className=docElem.className.replace(/(^|\s)no-js(\s|$)/,"$1js$2");
+docElem=null};</script><meta http-equiv="Content-type" content="text/html; charset=utf-8"><meta http-equiv="Content-Script-Type" content="text/javascript"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="viewport" content="initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"><link rel="apple-touch-icon" href="/RSS-Reader/static/sproutcore/foundation/en/87bb8b04389d2242c206b7029cd964a457428b28/source/resources/images/sproutcore-logo.png"><link rel="apple-touch-startup-image" media="screen and (orientation:portrait)" href="/RSS-Reader/static/sproutcore/foundation/en/87bb8b04389d2242c206b7029cd964a457428b28/source/resources/images/sproutcore-startup-portrait.png"><link rel="apple-touch-startup-image" media="screen and (orientation:landscape)" href="/RSS-Reader/static/sproutcore/foundation/en/87bb8b04389d2242c206b7029cd964a457428b28/source/resources/images/sproutcore-startup-landscape.png"><link rel="shortcut icon" href="/RSS-Reader/static/sproutcore/foundation/en/87bb8b04389d2242c206b7029cd964a457428b28/resources/images/favicon.ico" type="image/x-icon"><title>Reading List</title><script>window.SC=window.SC||{MODULE_INFO:{},LAZY_INSTANTIATION:{}};SC.buildMode="production";
+SC.buildNumber="49987a357f1c00d3b2ecd2f53d235a1be77cb372";SC.buildLocale="en";</script><script type="text/javascript">String.preferredLanguage="en";</script><script type="text/javascript">window.SC=window.SC||{MODULE_INFO:{},LAZY_INSTANTIATION:{}};SC.BROWSER={android:"android",blackberry:"blackberry",chrome:"chrome",firefox:"firefox",ie:"ie",opera:"opera",safari:"safari",unknown:"unknown"};
+SC.DEVICE={android:"android",blackberry:"blackberry",desktop:"desktop",ipad:"ipad",iphone:"iphone",ipod:"ipod",mobile:"mobile"};
+SC.ENGINE={gecko:"gecko",opera:"opera",presto:"presto",trident:"trident",webkit:"webkit"};
+SC.OS={android:"android",blackberry:"blackberry",ios:"ios",linux:"linux",mac:"mac",win:"windows"};
+SC.detectBrowser=function(userAgent,language){var browser={},device,engineAndVersion,isIOSDevice,conExp="(?:[\\/:\\::\\s:;])",numExp="(\\S+[^\\s:;:\\)]|)",nameAndVersion,osAndVersion,override;
+userAgent=(userAgent||navigator.userAgent).toLowerCase();language=language||navigator.language||navigator.browserLanguage;
+device=userAgent.match(new RegExp("(android|ipad|iphone|ipod|blackberry)"))||userAgent.match(new RegExp("(mobile)"))||["",SC.DEVICE.desktop];
+browser.device=device[1];isIOSDevice=browser.device===SC.DEVICE.ipad||browser.device===SC.DEVICE.iphone||browser.device===SC.DEVICE.ipod;
+nameAndVersion=userAgent.match(new RegExp("(opera|chrome|firefox|android|blackberry)"+conExp+numExp))||userAgent.match(new RegExp("(ie|safari)"+conExp+numExp))||["",SC.BROWSER.unknown,"0"];
+if(isIOSDevice){nameAndVersion[1]=SC.BROWSER.safari}override=userAgent.match(new RegExp("(version)"+conExp+numExp));
+if(override){nameAndVersion[2]=override[2]}else{if(nameAndVersion[1]===SC.BROWSER.safari){nameAndVersion[2]="0"
+}}browser.name=nameAndVersion[1];browser.version=nameAndVersion[2];engineAndVersion=userAgent.match(new RegExp("(presto)"+conExp+numExp))||userAgent.match(new RegExp("(opera|trident|webkit|gecko)"+conExp+numExp))||["",SC.BROWSER.unknown,"0"];
+override=browser.name===SC.BROWSER.ie?SC.ENGINE.trident:false;if(override){engineAndVersion[1]=override
+}override=browser.name===SC.BROWSER.ie&&engineAndVersion[2]==="0";if(override){engineAndVersion[2]=browser.version
+}override=userAgent.match(new RegExp("(rv)"+conExp+numExp));if(override){engineAndVersion[2]=override[2]
+}browser.engine=engineAndVersion[1];browser.engineVersion=engineAndVersion[2];if(browser.name===SC.BROWSER.unknown){browser.name=browser.engine
+}osAndVersion=userAgent.match(new RegExp("(blackberry)"))||userAgent.match(new RegExp("(android|iphone(?: os)|windows(?: nt))"+conExp+numExp))||userAgent.match(new RegExp("(os|mac(?: os)(?: x))"+conExp+numExp))||userAgent.match(new RegExp("(linux)"))||[null,SC.BROWSER.unknown,"0"];
+if(isIOSDevice){osAndVersion[1]=SC.OS.ios}else{if(osAndVersion[1]==="mac os x"||osAndVersion[1]==="mac os"){osAndVersion[1]=SC.OS.mac
+}else{if(osAndVersion[1]==="windows nt"){osAndVersion[1]=SC.OS.windows}}}osAndVersion[2]=osAndVersion[2]?osAndVersion[2].replace(/_/g,"."):"0";
+browser.os=osAndVersion[1];browser.osVersion=osAndVersion[2];browser.windows=browser.isWindows=browser.os===SC.OS.windows;
+browser.mac=browser.isMac=browser.os===SC.OS.mac;browser.lion=browser.isLion=!!(/mac os x 10_7/.test(userAgent)&&!/like mac os x 10_7/.test(userAgent));
+browser.iPhone=browser.isiPhone=browser.device===SC.DEVICE.iphone;browser.iPod=browser.isiPod=browser.device===SC.DEVICE.ipod;
+browser.iPad=browser.isiPad=browser.device===SC.DEVICE.ipad;browser.iOS=browser.isiOS=browser.os===SC.OS.ios;
+browser.android=browser.isAndroid=browser.os===SC.OS.android;browser.opera=browser.name===SC.BROWSER.opera?browser.version:"0";
+browser.isOpera=browser.name===SC.BROWSER.opera;browser.msie=browser.name===SC.BROWSER.ie?browser.version:"0";
+browser.isIE=browser.engine===SC.ENGINE.trident;browser.isIE8OrLower=browser.name===SC.BROWSER.ie&&browser.version<=8;
+browser.mozilla=browser.engine===SC.ENGINE.gecko?browser.version:"0";browser.isMozilla=browser.engine===SC.ENGINE.gecko;
+browser.webkit=browser.engine===SC.ENGINE.webkit?browser.engineVersion:"0";browser.isWebkit=browser.engine===SC.ENGINE.webkit;
+browser.chrome=browser.name===SC.BROWSER.chrome?browser.version:"0";browser.isChrome=browser.name===SC.BROWSER.chrome;
+browser.mobileSafari=browser.os===SC.OS.ios?browser.version:"0";browser.isMobileSafari=browser.name===SC.BROWSER.safari&&browser.os===SC.OS.ios;
+browser.iPadSafari=browser.device===SC.DEVICE.ipad&&browser.name===SC.BROWSER.safari?browser.version:0;
+browser.isiPadSafari=browser.device===SC.DEVICE.ipad&&browser.name===SC.BROWSER.safari;
+browser.iPhoneSafari=browser.device===SC.DEVICE.iphone&&browser.name===SC.BROWSER.safari?browser.version:0;
+browser.isiPhoneSafari=browser.device===SC.DEVICE.iphone&&browser.name===SC.BROWSER.safari;
+browser.iPodSafari=browser.device===SC.DEVICE.ipod&&browser.name===SC.BROWSER.safari?browser.version:0;
+browser.isiPodSafari=browser.device===SC.DEVICE.ipod&&browser.name===SC.BROWSER.safari;
+browser.isiOSHomeScreen=browser.isMobileSafari&&!(/apple.*mobile.*safari/.test(userAgent));
+browser.safari=browser.name===SC.BROWSER.safari&&browser.os===SC.OS.mac?browser.version:0;
+browser.isSafari=browser.name===SC.BROWSER.safari&&browser.os===SC.OS.mac;browser.language=language.split("-",1)[0];
+browser.countryCode=language.split("-")[1]?language.split("-")[1].toLowerCase():undefined;
+browser.current=browser.name;return browser};SC.browser=SC.detectBrowser();if(typeof SC_benchmarkPreloadEvents!=="undefined"){SC.benchmarkPreloadEvents=SC_benchmarkPreloadEvents;
+SC_benchmarkPreloadEvents=undefined}else{SC.benchmarkPreloadEvents={headStart:new Date().getTime()}
+}SC.setupBodyClassNames=function(){var el=document.body,browser,platform,shadows,borderRad,classNames,style,ieVersion;
+if(!el){return}browser=SC.browser.current;platform=SC.browser.windows?"windows":SC.browser.mac?"mac":"other-platform";
+style=document.documentElement.style;shadows=(style.MozBoxShadow!==undefined)||(style.webkitBoxShadow!==undefined)||(style.oBoxShadow!==undefined)||(style.boxShadow!==undefined);
+borderRad=(style.MozBorderRadius!==undefined)||(style.webkitBorderRadius!==undefined)||(style.oBorderRadius!==undefined)||(style.borderRadius!==undefined);
+classNames=el.className?el.className.split(" "):[];if(shadows){classNames.push("box-shadow")
+}if(borderRad){classNames.push("border-rad")}classNames.push(browser,platform);ieVersion=parseInt(SC.browser.version,10);
+if(SC.browser.isIE){if(ieVersion===7){classNames.push("ie7")}else{if(ieVersion===8){classNames.push("ie8")
+}else{if(ieVersion===9){classNames.push("ie9")}}}}if(browser==="safari"||browser==="chrome"){classNames.push("webkit")
+}if(SC.browser.mobileSafari){classNames.push("mobile-safari")}if("createTouch" in document){classNames.push("touch")
+}el.className=classNames.join(" ")};</script><script>(function(){var styles=[];if(window.devicePixelRatio==2||window.location.search.indexOf("2x")>-1){styles=["/RSS-Reader/static/reading_list/en/49987a357f1c00d3b2ecd2f53d235a1be77cb372/stylesheet@2x-packed.css"];
+SC.APP_IMAGE_ASSETS=["/RSS-Reader/static/sproutcore/desktop/en/ba646adf0fdc074e8ec5fe8e920bf8bfeedf0fa0/stylesheet-no-repeat@2x.png","/RSS-Reader/static/sproutcore/ace/en/a97a573e46f81cdda0e20eb04fca1d31d5d71d86/stylesheet-no-repeat@2x.png","/RSS-Reader/static/sproutcore/ace/en/a97a573e46f81cdda0e20eb04fca1d31d5d71d86/stylesheet-repeat-x@2x.png","/RSS-Reader/static/sproutcore/ace/en/a97a573e46f81cdda0e20eb04fca1d31d5d71d86/stylesheet-repeat-y@2x.png","/RSS-Reader/static/reading_list/en/49987a357f1c00d3b2ecd2f53d235a1be77cb372/stylesheet-no-repeat@2x.png"]
+}else{styles=["/RSS-Reader/static/reading_list/en/49987a357f1c00d3b2ecd2f53d235a1be77cb372/stylesheet-packed.css"];
+SC.APP_IMAGE_ASSETS=["/RSS-Reader/static/sproutcore/desktop/en/ba646adf0fdc074e8ec5fe8e920bf8bfeedf0fa0/stylesheet-no-repeat.png","/RSS-Reader/static/sproutcore/ace/en/a97a573e46f81cdda0e20eb04fca1d31d5d71d86/stylesheet-no-repeat.png","/RSS-Reader/static/sproutcore/ace/en/a97a573e46f81cdda0e20eb04fca1d31d5d71d86/stylesheet-repeat-x.png","/RSS-Reader/static/sproutcore/ace/en/a97a573e46f81cdda0e20eb04fca1d31d5d71d86/stylesheet-repeat-y.png","/RSS-Reader/static/reading_list/en/49987a357f1c00d3b2ecd2f53d235a1be77cb372/stylesheet-no-repeat.png"]
+}var head=document.getElementsByTagName("head")[0],len=styles.length,idx,css;for(idx=0;
+idx<len;idx++){css=document.createElement("link");css.rel="stylesheet";css.type="text/css";
+css.href=styles[idx];css.media="screen";head.appendChild(css)}})();</script><script>SC.benchmarkPreloadEvents.headEnd=new Date().getTime();</script></head><body class="sc-theme sc-focus"><script>SC.benchmarkPreloadEvents.bodyStart=new Date().getTime();</script><script type="text/javascript">if(SC.setupBodyClassNames){SC.setupBodyClassNames()};</script><div id="loading"><p class="loading">Loading...<p></div><script type="text/javascript" src="/RSS-Reader/static/reading_list/en/49987a357f1c00d3b2ecd2f53d235a1be77cb372/javascript-packed.js"></script><script>SC.benchmarkPreloadEvents.bodyEnd=new Date().getTime();</script></body></html>
